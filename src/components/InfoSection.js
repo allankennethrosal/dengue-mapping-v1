@@ -7,7 +7,7 @@ const InfoSection = props => {
 
   return (
     <>
-      <div className="w-full">
+      <div className="w-full mt-3">
         <div className="flex justify-start items-center bg-gray-100 p-3 rounded-lg">
           <svg
             className="h-8 w-8 text-gray-900"
@@ -85,7 +85,7 @@ const InfoSection = props => {
         </div>
       </div>
 
-      <div className="bg-gray-100 w-full h-72 mt-3"></div>
+      <div className="bg-gray-100 w-full h-24 mt-3"></div>
     </>
   );
 };
