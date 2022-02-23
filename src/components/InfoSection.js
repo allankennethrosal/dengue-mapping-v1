@@ -2,7 +2,7 @@ import React from "react";
 
 const InfoSection = props => {
   const {
-    location: { municity, province },
+    location: { muncity, province },
     muncityCasesCount
   } = props;
 
@@ -27,8 +27,8 @@ const InfoSection = props => {
             <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
           </svg>
           <p className="text-gray-900 font-bold ml-2 text-md">
-            {municity
-              ? `${municity}, ${province}`
+            {muncity
+              ? `${muncity}, ${province}`
               : "Click a city or municipality on the map"}
           </p>
         </div>
@@ -58,7 +58,9 @@ const InfoSection = props => {
             <h6 className="text-gray-900 font-bold text-2xl">
               {muncityCasesCount}
             </h6>
-            <p className="text-gray-600 font-bold text-sm">Dengue Cases</p>
+            <p className="text-gray-600 font-bold text-sm">
+              Recorded Dengue Cases
+            </p>
           </div>
         </div>
 

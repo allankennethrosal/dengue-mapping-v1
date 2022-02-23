@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, GeoJSON, Tooltip } from "react-leaflet";
 import dataGeoJson from "../data/municities-province-ph104200000.0.1.json";
@@ -32,64 +32,90 @@ const getRanges = (minCasesCount, interval) => {
   }
   return ranges;
 };
+const getCases = (dengueData, year) => {
+  const casesCount = {};
+  if (year === "All") {
+    // count occurences of cases for municities
+    for (const el of dengueData) {
+      if (casesCount[el.Muncity]) {
+        casesCount[el.Muncity] += 1;
+      } else {
+        casesCount[el.Muncity] = 1;
+      }
+    }
+  } else {
+    const yearData = dengueData.filter(
+      d => d.DateOfEntry.split("/")[2] === year[2] + year[3]
+    );
+    // count occurences of cases for municities
+    for (const el of yearData) {
+      if (casesCount[el.Muncity]) {
+        casesCount[el.Muncity] += 1;
+      } else {
+        casesCount[el.Muncity] = 1;
+      }
+    }
+  }
+
+  return casesCount;
+};
 
 const Map = props => {
-  const { setMunicity, setProvince, dengueData, setMuncityCasesCount } = props;
-  const [mapKey, setMapKey] = useState(Math.random());
+  const {
+    muncity,
+    setMuncity,
+    setProvince,
+    dengueData,
+    setMuncityCasesCount,
+    year
+  } = props;
   const [layerSelected, setLayerSelected] = useState("");
   const centerLoc = [8.323365, 123.686847];
 
-  const casesCount = {};
-  // count occurences of cases for municities
-  for (const el of dengueData) {
-    if (casesCount[el.Muncity]) {
-      casesCount[el.Muncity] += 1;
-    } else {
-      casesCount[el.Muncity] = 1;
-    }
-  }
   // get all cases count, lowest and highest cases
+  const casesCount = getCases(dengueData, year);
   const casesValues = Object.values(casesCount);
   const maxCasesCount = Math.max(...casesValues);
   const minCasesCount = Math.min(...casesValues);
+
   // get interval and range of cases based on min and max cases
   const interval = Math.floor((maxCasesCount - minCasesCount) / 5);
   const ranges = getRanges(minCasesCount, interval);
 
-  useEffect(() => {
-    setMapKey(Math.random());
-  }, []);
-
+  // events for each geojson layer
   const onEachLayer = (muncity, layer) => {
     const muncityName = muncity.properties.ADM3_EN;
     const provinceName = muncity.properties.ADM2_EN;
 
     const onLayerClick = () => {
-      setMunicity(muncityName);
+      setMuncity(muncityName);
       setProvince(provinceName);
       setLayerSelected(muncityName);
       layer.bringToFront();
-
-      const numberOfCases = dengueData.filter(
-        d => d.Muncity === muncityName.toUpperCase()
-      );
-      setMuncityCasesCount(numberOfCases.length);
     };
 
     const muncityCases = casesCount[muncityName.toUpperCase()];
     const rangeCases = ranges.filter(
       r => r.min <= muncityCases && r.max >= muncityCases
     )[0];
-    layer.options.fillOpacity = muncityCases === 0 ? 0 : rangeCases.opacity;
+    layer.options.fillOpacity =
+      muncityCases === 0 || muncityCases === undefined ? 0 : rangeCases.opacity;
     layer.on({
       click: onLayerClick
     });
   };
 
+  const numberOfCases = casesCount[muncity.toUpperCase()];
+  if (numberOfCases) {
+    setMuncityCasesCount(numberOfCases);
+  } else {
+    setMuncityCasesCount(0);
+  }
+
   return (
     <>
       <MapContainer
-        key={mapKey}
+        key={year}
         center={centerLoc}
         zoom={10}
         className="w-full h-full z-0"
