@@ -36,7 +36,7 @@ const MapControls = props => {
             setYear(e.target.value);
           }}
         >
-          <option value="2014">2014 - Present</option>
+          <option value="All">2014 - Present</option>
           <option value="2014">2014</option>
           <option value="2015">2015</option>
           <option value="2016">2016</option>
