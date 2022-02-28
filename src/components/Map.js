@@ -5,6 +5,7 @@ import dataGeoJson from "../data/municities-province-ph104200000.0.1.json";
 
 const getRanges = (minCasesCount, interval) => {
   const ranges = [];
+  const colors = ["#ccc", "#ffffe0", "#ffae42", "#FFA500", "#ff0000"];
   let opacity = 0.2;
 
   for (let i = 0; i < 5; i++) {
@@ -14,7 +15,8 @@ const getRanges = (minCasesCount, interval) => {
       const range = {
         min: parseFloat(min.toFixed(2)),
         max: parseFloat(max.toFixed(2)),
-        opacity: parseFloat(opacity.toFixed(1))
+        opacity: parseFloat(opacity.toFixed(1)),
+        color: colors[i]
       };
       ranges.push(range);
       opacity += 0.2;
@@ -24,7 +26,8 @@ const getRanges = (minCasesCount, interval) => {
       const range = {
         min: parseFloat(min.toFixed(2)),
         max: parseFloat(max.toFixed(2)),
-        opacity: parseFloat(opacity.toFixed(1))
+        opacity: parseFloat(opacity.toFixed(1)),
+        color: colors[i]
       };
       ranges.push(range);
       opacity += 0.2;

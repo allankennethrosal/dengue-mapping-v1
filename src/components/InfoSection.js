@@ -3,12 +3,55 @@ import React from "react";
 const InfoSection = props => {
   const {
     location: { muncity, province },
-    muncityCasesCount
+    muncityCasesCount,
+    year,
+    setYear
   } = props;
 
   return (
     <>
-      <div className="w-full mt-3">
+      <div className="flex flex-col w-full space-y-3">
+        <div className="flex justify-start items-center bg-gray-800 rounded-lg">
+          <div className="p-3 border-r-2 border-gray-600">
+            <svg
+              className="h-8 w-8 text-gray-100"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {" "}
+              <path stroke="none" d="M0 0h24v24H0z" />{" "}
+              <rect x="4" y="5" width="16" height="16" rx="2" />{" "}
+              <line x1="16" y1="3" x2="16" y2="7" />{" "}
+              <line x1="8" y1="3" x2="8" y2="7" />{" "}
+              <line x1="4" y1="11" x2="20" y2="11" />{" "}
+              <line x1="11" y1="15" x2="12" y2="15" />{" "}
+              <line x1="12" y1="15" x2="12" y2="18" />
+            </svg>
+          </div>
+          <select
+            id="year"
+            className="flex-1 p-3 bg-gray-800 text-gray-100 font-bold cursor-pointer outline-none"
+            value={year}
+            onChange={e => {
+              setYear(e.target.value);
+            }}
+          >
+            <option value="All">2014 - Present</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+          </select>
+        </div>
         <div className="flex justify-start items-center bg-gray-100 p-3 rounded-lg">
           <svg
             className="h-8 w-8 text-gray-900"
@@ -27,14 +70,9 @@ const InfoSection = props => {
             <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
           </svg>
           <p className="text-gray-900 font-bold ml-2 text-md">
-            {muncity
-              ? `${muncity}, ${province}`
-              : "Click a city or municipality on the map"}
+            {muncity ? `${muncity}, ${province}` : "Click a layer on the map"}
           </p>
         </div>
-      </div>
-
-      <div className="flex lg:flex-row md:flex-col sm:flex-row flex-col w-full lg:space-x-3 lg:space-y-0 md:space-x-0 md:space-y-3 sm:space-x-3 sm:space-y-0 space-x-0 space-y-3 mt-3">
         <div className="flex justify-start items-center w-full bg-gray-100 p-3 rounded-lg">
           <div>
             <svg
@@ -63,7 +101,6 @@ const InfoSection = props => {
             </p>
           </div>
         </div>
-
         <div className="flex justify-start items-center w-full bg-gray-100 p-3 rounded-lg">
           <div>
             <svg
@@ -90,9 +127,8 @@ const InfoSection = props => {
             </p>
           </div>
         </div>
+        <div className="bg-gray-100 w-full h-24 mt-3"></div>
       </div>
-
-      <div className="bg-gray-100 w-full h-24 mt-3"></div>
     </>
   );
 };
