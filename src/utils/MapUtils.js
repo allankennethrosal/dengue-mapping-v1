@@ -1,7 +1,7 @@
 // get the range values of all cases on specific years
 export const getRanges = (minCasesCount, interval) => {
   const ranges = [];
-  const colors = ["#ccc", "#ffffe0", "#ffae42", "#FFA500", "#ff0000"];
+  const colors = ["#FEF3B2", "#FFE855", "#FFDC00", "#FF8300", "#FF3600"];
   let opacity = 0.2;
 
   // create ranges
@@ -46,9 +46,7 @@ export const getCases = (dengueData, year) => {
       }
     }
   } else {
-    const yearData = dengueData.filter(
-      d => d.DateOfEntry.split("/")[2] === year[2] + year[3]
-    );
+    const yearData = dengueData.filter(d => d.Year === year);
     // count occurences of cases for muncities on specific year
     for (const el of yearData) {
       if (casesCount[el.Muncity]) {

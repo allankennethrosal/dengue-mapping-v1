@@ -50,6 +50,10 @@ const Map = props => {
     )[0];
     layer.options.fillOpacity =
       muncityCases === 0 || muncityCases === undefined ? 0 : rangeCases.opacity;
+    // layer.options.fillColor =
+    //   muncityCases === 0 || muncityCases === undefined
+    //     ? "#ccc"
+    //     : rangeCases.color;
     layer.on({
       click: onLayerClick
     });
@@ -88,7 +92,7 @@ const Map = props => {
             <GeoJSON
               key={geoJson.properties.ADM3_EN}
               style={{
-                fillColor: "#e00000",
+                fillColor: "#F52828",
                 color:
                   layerSelected === geoJson.properties.ADM3_EN
                     ? "white"

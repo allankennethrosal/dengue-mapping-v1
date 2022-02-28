@@ -1,4 +1,5 @@
 import React from "react";
+import { ChartAgeGroup } from "./ChartAgeGroup";
 
 const InfoSection = props => {
   const {
@@ -127,7 +128,14 @@ const InfoSection = props => {
             </p>
           </div>
         </div>
-        <div className="bg-gray-100 w-full h-24 mt-3"></div>
+        <div className="bg-gray-100 w-full p-3">
+          <h6 className="text-gray-900 font-bold text-sm px-2 mb-2">
+            Dengue Cases of Age Groups
+          </h6>
+          <div className="flex justify-center items-center w-full p-3">
+            <ChartAgeGroup />
+          </div>
+        </div>
       </div>
     </>
   );

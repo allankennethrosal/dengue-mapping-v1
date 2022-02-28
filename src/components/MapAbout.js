@@ -6,7 +6,7 @@ const MapAbout = () => {
   return (
     <>
       <button
-        className="flex justify-start items-center absolute bottom-3 left-3 bg-gray-800 hover:bg-gray-900 text-sm py-2 px-3 rounded-lg"
+        className="flex justify-start items-center absolute bottom-3 left-3 bg-gray-800 hover:bg-gray-900 text-sm py-2 px-3 rounded-lg drop-shadow-lg"
         onClick={() => setOpenAbout(true)}
       >
         <svg
@@ -26,7 +26,7 @@ const MapAbout = () => {
       </button>
 
       <div
-        className={`absolute bottom-3 left-3 bg-yellow-200 w-64 rounded ${
+        className={`absolute bottom-3 left-3 bg-yellow-200 w-64 rounded-lg drop-shadow-lg ${
           openAbout ? "block" : "hidden"
         }`}
       >

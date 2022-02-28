@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import MapFiltersAge from "./MapFiltersAge";
+import MapFiltersGender from "./MapFiltersGender";
 
 const MapFilter = () => {
   const [openFilters, setOpenFilters] = useState(false);
@@ -6,7 +8,7 @@ const MapFilter = () => {
   return (
     <>
       <button
-        className="flex justify-start items-center absolute top-3 left-3 bg-gray-100 text-gray-900 hover:bg-white text-sm py-2 px-3 rounded-lg"
+        className="flex justify-start items-center absolute top-3 left-3 bg-white text-gray-900 hover:bg-gray-100 text-sm py-2 px-3 rounded-lg drop-shadow-lg"
         onClick={() => setOpenFilters(true)}
       >
         <svg
@@ -37,11 +39,11 @@ const MapFilter = () => {
       </button>
 
       <div
-        className={`absolute top-0 left-0 bg-transparent h-full w-full lg:w-1/3 p-3 z-20 ${
+        className={`absolute top-0 left-0 bg-transparent h-full md:h-auto w-full lg:min-w-max lg:w-1/3 p-3 z-20 drop-shadow-lg ${
           openFilters ? "block" : "hidden"
         }`}
       >
-        <div className="bg-white p-3 w-full h-full rounded-lg">
+        <div className="flex flex-col bg-white p-3 w-full h-auto max-h-full space-y-3 rounded-lg overflow-y-scroll">
           <div className="flex justify-between items-center">
             <p className="text-gray-900 font-bold">Map Filters</p>
             <button
@@ -63,6 +65,8 @@ const MapFilter = () => {
               </svg>
             </button>
           </div>
+          <MapFiltersAge />
+          <MapFiltersGender />
         </div>
       </div>
     </>
