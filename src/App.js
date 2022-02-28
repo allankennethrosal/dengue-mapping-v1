@@ -2,7 +2,9 @@ import { useState } from "react";
 import Map from "./components/Map";
 import InfoSection from "./components/InfoSection";
 import NavbarLogo from "./assets/mapquito-logo.png";
+import MapFilters from "./components/MapFilters";
 import dengueData from "./data/dengue-cases-misocc.json";
+import MapAbout from "./components/MapAbout";
 
 function App() {
   const [muncity, setMuncity] = useState("");
@@ -17,7 +19,7 @@ function App() {
           <img src={NavbarLogo} className="w-36" alt="Navbar Logo" />
         </div>
         <div className="flex-1 flex md:flex-row flex-col justify-start items-start h-full w-full">
-          <div className="relative bg-white md:h-full h-500 xl:w-3/4 lg:w-2/3 md:w-2/3 w-full overflow-hidden">
+          <div className="relative bg-white md:h-full h-1/2 xl:w-3/4 md:w-2/3 w-full overflow-hidden">
             <Map
               muncity={muncity}
               setMuncity={setMuncity}
@@ -26,8 +28,10 @@ function App() {
               setMuncityCasesCount={setMuncityCasesCount}
               year={year}
             />
+            <MapFilters />
+            <MapAbout />
           </div>
-          <div className="flex flex-col bg-white h-full xl:w-1/4 lg:w-1/3 md:w-1/3 w-full rounded-b-xl rounded-t-none p-3 md:overflow-y-scroll overflow-auto">
+          <div className="flex flex-col bg-white md:h-full h-1/2 xl:w-1/4 md:w-1/3 w-full rounded-b-xl rounded-t-none p-3 md:overflow-y-scroll overflow-auto">
             <InfoSection
               location={{
                 muncity,

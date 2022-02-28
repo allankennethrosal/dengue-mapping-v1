@@ -2,7 +2,7 @@ import React from "react";
 
 const InfoSection = props => {
   const {
-    location: { muncity, province },
+    location: { muncity },
     muncityCasesCount,
     year,
     setYear
@@ -42,7 +42,7 @@ const InfoSection = props => {
               setYear(e.target.value);
             }}
           >
-            <option value="All">2014 - Present</option>
+            <option value="All">2014 to 2020</option>
             <option value="2014">2014</option>
             <option value="2015">2015</option>
             <option value="2016">2016</option>
@@ -70,7 +70,7 @@ const InfoSection = props => {
             <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
           </svg>
           <p className="text-gray-900 font-bold ml-2 text-md">
-            {muncity ? `${muncity}, ${province}` : "Click a layer on the map"}
+            {muncity ? `${muncity}` : "Click a layer on the map"}
           </p>
         </div>
         <div className="flex justify-start items-center w-full bg-gray-100 p-3 rounded-lg">

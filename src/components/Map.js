@@ -1,67 +1,14 @@
 import React, { useState } from "react";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, GeoJSON, Tooltip } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  GeoJSON,
+  Tooltip,
+  ZoomControl
+} from "react-leaflet";
 import dataGeoJson from "../data/municities-province-ph104200000.0.1.json";
-
-const getRanges = (minCasesCount, interval) => {
-  const ranges = [];
-  const colors = ["#ccc", "#ffffe0", "#ffae42", "#FFA500", "#ff0000"];
-  let opacity = 0.2;
-
-  for (let i = 0; i < 5; i++) {
-    if (i === 0) {
-      const min = parseFloat(minCasesCount);
-      const max = parseFloat(minCasesCount + interval);
-      const range = {
-        min: parseFloat(min.toFixed(2)),
-        max: parseFloat(max.toFixed(2)),
-        opacity: parseFloat(opacity.toFixed(1)),
-        color: colors[i]
-      };
-      ranges.push(range);
-      opacity += 0.2;
-    } else {
-      const min = ranges[ranges.length - 1].max + 1;
-      const max = min + interval;
-      const range = {
-        min: parseFloat(min.toFixed(2)),
-        max: parseFloat(max.toFixed(2)),
-        opacity: parseFloat(opacity.toFixed(1)),
-        color: colors[i]
-      };
-      ranges.push(range);
-      opacity += 0.2;
-    }
-  }
-  return ranges;
-};
-const getCases = (dengueData, year) => {
-  const casesCount = {};
-  if (year === "All") {
-    // count occurences of cases for municities
-    for (const el of dengueData) {
-      if (casesCount[el.Muncity]) {
-        casesCount[el.Muncity] += 1;
-      } else {
-        casesCount[el.Muncity] = 1;
-      }
-    }
-  } else {
-    const yearData = dengueData.filter(
-      d => d.DateOfEntry.split("/")[2] === year[2] + year[3]
-    );
-    // count occurences of cases for municities
-    for (const el of yearData) {
-      if (casesCount[el.Muncity]) {
-        casesCount[el.Muncity] += 1;
-      } else {
-        casesCount[el.Muncity] = 1;
-      }
-    }
-  }
-
-  return casesCount;
-};
+import { getCases, getRanges } from "../utils/MapUtils";
 
 const Map = props => {
   const {
@@ -123,6 +70,7 @@ const Map = props => {
         zoom={10}
         className="w-full h-full z-0"
         minZoom={9}
+        zoomControl={false}
         // dragging={false}
       >
         <TileLayer
@@ -134,7 +82,7 @@ const Map = props => {
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         /> */}
-
+        <ZoomControl position="bottomright" />
         {dataGeoJson.features.map(geoJson => {
           return (
             <GeoJSON
