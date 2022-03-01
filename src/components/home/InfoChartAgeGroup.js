@@ -4,7 +4,7 @@ import { Pie } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export function ChartAgeGroup() {
+const InfoSectionChartAgeGroup = () => {
   const [windowX, setWindowX] = useState(window.innerWidth);
 
   const options = {
@@ -64,5 +64,18 @@ export function ChartAgeGroup() {
     window.addEventListener("resize", handleResize);
   });
 
-  return <Pie data={data} options={options} height={null} width={null} />;
-}
+  return (
+    <>
+      <div className="bg-gray-100 w-full p-3">
+        <h6 className="text-gray-900 font-bold text-sm px-2 mb-2">
+          Dengue Cases of Age Groups
+        </h6>
+        <div className="flex justify-center items-center w-full p-3">
+          <Pie data={data} options={options} height={null} width={null} />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default InfoSectionChartAgeGroup;

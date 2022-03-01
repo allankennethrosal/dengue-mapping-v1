@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "leaflet/dist/leaflet.css";
 import {
   MapContainer,
@@ -7,10 +7,11 @@ import {
   Tooltip,
   ZoomControl
 } from "react-leaflet";
-import dataGeoJson from "../data/municities-province-ph104200000.0.1.json";
-import { getCases, getRanges } from "../utils/MapUtils";
+import dataGeoJson from "../../data/municities-province-ph104200000.0.1.json";
+import { getCases, getRanges } from "../../utils/MapUtils";
+import { MapContext } from "../../context/MapContext";
 
-const Map = props => {
+const Map = () => {
   const {
     muncity,
     setMuncity,
@@ -18,7 +19,7 @@ const Map = props => {
     dengueData,
     setMuncityCasesCount,
     year
-  } = props;
+  } = useContext(MapContext);
   const [layerSelected, setLayerSelected] = useState("");
   const centerLoc = [8.323365, 123.686847];
 
