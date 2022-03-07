@@ -36,6 +36,8 @@ export const getRanges = (minCasesCount, interval) => {
 // get the number of cases for each muncity
 export const getCases = (dengueData, year) => {
   const casesCount = {};
+  const casesPrevious = {};
+
   if (year === "All") {
     // count all occurences of cases for muncities
     for (const el of dengueData) {
@@ -44,18 +46,36 @@ export const getCases = (dengueData, year) => {
       } else {
         casesCount[el.Muncity] = 1;
       }
+
+      // get data for latest year
+      if (casesPrevious[el.Muncity] && el.Year === "2022") {
+        casesPrevious[el.Muncity] += 1;
+      } else if (el.Year === "2022") {
+        casesPrevious[el.Muncity] = 1;
+      }
     }
   } else {
-    const yearData = dengueData.filter(d => d.Year === year);
+    const yearData = dengueData.filter(
+      d => d.Year === year || parseInt(d.Year) === parseInt(year) - 1
+    );
     // count occurences of cases for muncities on specific year
     for (const el of yearData) {
-      if (casesCount[el.Muncity]) {
-        casesCount[el.Muncity] += 1;
-      } else {
-        casesCount[el.Muncity] = 1;
+      if (el.Year === year)
+        if (casesCount[el.Muncity]) {
+          casesCount[el.Muncity] += 1;
+        } else {
+          casesCount[el.Muncity] = 1;
+        }
+      else {
+        // get data for previous year
+        if (casesPrevious[el.Muncity]) {
+          casesPrevious[el.Muncity] += 1;
+        } else {
+          casesPrevious[el.Muncity] = 1;
+        }
       }
     }
   }
 
-  return casesCount;
+  return { casesCount, casesPrevious };
 };

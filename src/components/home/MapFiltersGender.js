@@ -7,7 +7,7 @@ const MapFiltersGender = () => {
   return (
     <>
       <div className="flex flex-col bg-gray-100 p-3 rounded-lg">
-        <label className="pb-2 mb-2 border-b-2 border-gray-300">Gender</label>
+        <label className="pb-2 mb-2 border-b-2 border-gray-300">Sex</label>
         <div className="inline-flex items-center">
           <label className="inline-flex items-center mr-5">
             <input

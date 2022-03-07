@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { MapContext } from "../../context/MapContext";
 
 const InfoSectionYearControl = () => {
-  const { year, setYear } = useContext(MapContext);
+  const { mapFilters, setMapFilters } = useContext(MapContext);
 
   return (
     <>
@@ -32,9 +32,9 @@ const InfoSectionYearControl = () => {
         <select
           id="year"
           className="flex-1 p-3 bg-gray-800 text-gray-100 font-bold cursor-pointer outline-none"
-          value={year}
+          value={mapFilters.year}
           onChange={e => {
-            setYear(e.target.value);
+            setMapFilters({ ...mapFilters, year: e.target.value });
           }}
         >
           <option value="All">2014 to 2020</option>

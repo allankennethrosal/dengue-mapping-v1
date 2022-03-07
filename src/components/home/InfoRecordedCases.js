@@ -2,7 +2,12 @@ import React, { useContext } from "react";
 import { MapContext } from "../../context/MapContext";
 
 const InfoSectionRecordedCases = () => {
-  const { muncityCasesCount } = useContext(MapContext);
+  const {
+    muncityCasesCount,
+    prevYearCase,
+    mapFilters: { year }
+  } = useContext(MapContext);
+  const comparedCases = parseInt(muncityCasesCount) - parseInt(prevYearCase);
 
   return (
     <>
@@ -54,8 +59,29 @@ const InfoSectionRecordedCases = () => {
           </svg>
         </div>
         <div className="ml-3">
-          <h6 className="text-red-600 font-bold text-2xl">+10</h6>
-          <p className="text-gray-600 font-bold text-sm">From previous year</p>
+          {year === "All" || year === "2014" ? (
+            <>
+              <h6 className="font-bold text-2xl text-red-600">
+                {year === "2014" ? "-" : prevYearCase}
+              </h6>
+              <p className="text-gray-600 font-bold text-sm">
+                {year === "2014" ? "From previous year" : "From current year"}
+              </p>
+            </>
+          ) : (
+            <>
+              <h6
+                className={`font-bold text-2xl ${
+                  comparedCases > 0 ? "text-red-600" : "text-green-600"
+                }`}
+              >
+                {comparedCases}
+              </h6>
+              <p className="text-gray-600 font-bold text-sm">
+                From previous year
+              </p>
+            </>
+          )}
         </div>
       </div>
     </>

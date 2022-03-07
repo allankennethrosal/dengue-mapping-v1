@@ -18,13 +18,14 @@ const Map = () => {
     setProvince,
     dengueData,
     setMuncityCasesCount,
-    year
+    setPrevYearCase,
+    mapFilters: { year }
   } = useContext(MapContext);
   const [layerSelected, setLayerSelected] = useState("");
   const centerLoc = [8.323365, 123.686847];
 
   // get all cases count, lowest and highest cases
-  const casesCount = getCases(dengueData, year);
+  const { casesCount, casesPrevious } = getCases(dengueData, year);
   const casesValues = Object.values(casesCount);
   const maxCasesCount = Math.max(...casesValues);
   const minCasesCount = Math.min(...casesValues);
@@ -61,10 +62,16 @@ const Map = () => {
   };
 
   const numberOfCases = casesCount[muncity.toUpperCase()];
+  const previousCases = casesPrevious[muncity.toUpperCase()];
   if (numberOfCases) {
     setMuncityCasesCount(numberOfCases);
   } else {
     setMuncityCasesCount(0);
+  }
+  if (previousCases) {
+    setPrevYearCase(previousCases);
+  } else {
+    setPrevYearCase(0);
   }
 
   return (
