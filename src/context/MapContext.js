@@ -8,15 +8,13 @@ export const MapProvider = props => {
   const [province, setProvince] = useState("");
   const [year, setYear] = useState("All");
   const [muncityCasesCount, setMuncityCasesCount] = useState(0);
-  const [activeData, setActiveData] = useState([]);
   const [prevYearCase, setPrevYearCase] = useState(0);
-  const [ageGroupCases, setAgeGroupCases] = useState({
-    children: 0,
-    youth: 0,
-    adults: 0,
-    seniors: 0
-  });
-  const [genderCases, setGenderCases] = useState({ male: 0, female: 0 });
+  const [ageChildrenCases, setAgeChildrenCases] = useState(0);
+  const [ageYouthCases, setAgeYouthCases] = useState(0);
+  const [ageAdultsCases, setAgeAdultsCases] = useState(0);
+  const [ageSeniorsCases, setAgeSeniorsCases] = useState(0);
+  const [genderMaleCases, setGenderMaleCases] = useState(0);
+  const [genderFemaleCases, setGenderFemaleCases] = useState(0);
 
   const [mapFilters, setMapFilters] = useState({
     year: "All", // All - "2014-2020"
@@ -38,12 +36,8 @@ export const MapProvider = props => {
     <MapContext.Provider
       value={{
         dengueData: dengueData.data,
-        activeData,
-        setActiveData,
         prevYearCase,
         setPrevYearCase,
-        // muncityData,
-        // setMuncityData,
         mapFilters,
         setMapFilters,
         muncity,
@@ -53,36 +47,22 @@ export const MapProvider = props => {
         year,
         setYear,
         muncityCasesCount,
-        setMuncityCasesCount
+        setMuncityCasesCount,
+        ageChildrenCases,
+        ageYouthCases,
+        ageAdultsCases,
+        ageSeniorsCases,
+        setAgeChildrenCases,
+        setAgeYouthCases,
+        setAgeAdultsCases,
+        setAgeSeniorsCases,
+        genderMaleCases,
+        setGenderMaleCases,
+        genderFemaleCases,
+        setGenderFemaleCases
       }}
     >
       {props.children}
     </MapContext.Provider>
   );
 };
-
-// const [muncityData, setMuncityData] = useState({
-//   ALORAN: {
-//     cases: 0,
-//     previousCases: 0,
-//     ageGroupCases: {
-//       children: 0, youth: 0, adults: 0, seniors: 0
-//     }
-//   },
-//   BALIANGAO: {},
-//   BONIFACIO: {},
-//   CALAMBA: {},
-//   CLARIN: {},
-//   CONCEPCION: {},
-//   "DON VICTORIANO CHIONGBIAN": {},
-//   JIMENEZ: {},
-//   "LOPEZ JAENA": {},
-//   "OROQUIETA CITY": {},
-//   "OZAMIS CITY": {},
-//   PANAON: {},
-//   PLARIDEL: {},
-//   "SAPANG DALAGA": {},
-//   SINACABAN: {},
-//   "TANGUB CITY": {},
-//   TUDELA: {}
-// });

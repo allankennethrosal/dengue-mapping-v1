@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import { MapContext } from "../../context/MapContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const InfoSectionChartAgeGroup = () => {
   const [windowX, setWindowX] = useState(window.innerWidth);
+  const {
+    ageChildrenCases,
+    ageYouthCases,
+    ageAdultsCases,
+    ageSeniorsCases
+  } = useContext(MapContext);
 
   const options = {
     responsive: true,
@@ -23,19 +30,20 @@ const InfoSectionChartAgeGroup = () => {
 
   const data = {
     labels: [
-      "00-14 years",
-      "15-24 years",
-      "25-64 years",
-      "65 years and over"
-      // "Children (00-14 years)",
-      // "Youth (15-24 years)",
-      // "Adults (25-64 years)",
-      // "Seniors (65 years and over)"
+      "00-14 years", // children
+      "15-24 years", // youth
+      "25-64 years", // adults
+      "65 years and over" // seniors
     ],
     datasets: [
       {
         label: "No. of Cases",
-        data: [12, 15, 9, 5],
+        data: [
+          ageChildrenCases,
+          ageYouthCases,
+          ageAdultsCases,
+          ageSeniorsCases
+        ],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -62,7 +70,7 @@ const InfoSectionChartAgeGroup = () => {
       setWindowX(window.innerWidth);
     }
     window.addEventListener("resize", handleResize);
-  });
+  }, []);
 
   return (
     <>
@@ -71,7 +79,18 @@ const InfoSectionChartAgeGroup = () => {
           Dengue Cases of Age Groups
         </h6>
         <div className="flex justify-center items-center w-full p-3">
-          <Pie data={data} options={options} height={null} width={null} />
+          {ageChildrenCases === 0 &&
+          ageYouthCases === 0 &&
+          ageAdultsCases === 0 &&
+          ageSeniorsCases === 0 ? (
+            // display gray circle if no data
+            <div className="flex md:flex-col flex-row md:space-y-3 space-y-0 md:space-x-0 space-x-5 justify-center items-center w-full">
+              <div className="h-32 w-32 bg-gray-300 rounded-full border-2 border-gray-400"></div>
+              <p className="text-gray-500 text-center">No data</p>
+            </div>
+          ) : (
+            <Pie data={data} options={options} height={null} width={null} />
+          )}
         </div>
       </div>
     </>

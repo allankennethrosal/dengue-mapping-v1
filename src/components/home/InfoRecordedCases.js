@@ -75,6 +75,7 @@ const InfoSectionRecordedCases = () => {
                   comparedCases > 0 ? "text-red-600" : "text-green-600"
                 }`}
               >
+                {comparedCases > 0 && "+"}
                 {comparedCases}
               </h6>
               <p className="text-gray-600 font-bold text-sm">

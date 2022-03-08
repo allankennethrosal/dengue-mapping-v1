@@ -33,14 +33,51 @@ export const getRanges = (minCasesCount, interval) => {
   return ranges;
 };
 
+// get age group name from age-year value of each data
+export const getAgeGroup = ageString => {
+  const age = parseInt(ageString);
+
+  if (age >= 0 && age <= 14) {
+    return "children";
+  } else if (age >= 15 && age <= 24) {
+    return "youth";
+  } else if (age >= 25 && age <= 64) {
+    return "adults";
+  } else {
+    return "seniors";
+  }
+};
+
+// get cases from each muncity by age group
+const getAgeGroupCases = (casesAgeGroup, el, ageGroupName) => {
+  if (casesAgeGroup[el.Muncity]) {
+    if (casesAgeGroup[el.Muncity][ageGroupName]) {
+      casesAgeGroup[el.Muncity][ageGroupName] += 1;
+    } else {
+      casesAgeGroup[el.Muncity][ageGroupName] = 1;
+    }
+  } else {
+    casesAgeGroup[el.Muncity] = {
+      children: 0,
+      youth: 0,
+      adults: 0,
+      seniors: 0
+    };
+    casesAgeGroup[el.Muncity][ageGroupName] = 1;
+  }
+};
+
 // get the number of cases for each muncity
 export const getCases = (dengueData, year) => {
   const casesCount = {};
   const casesPrevious = {};
+  const casesAgeGroup = {};
+  const d = new Date();
+  const todayYear = d.getFullYear().toString();
 
   if (year === "All") {
-    // count all occurences of cases for muncities
     for (const el of dengueData) {
+      // count all occurences of cases for muncities
       if (casesCount[el.Muncity]) {
         casesCount[el.Muncity] += 1;
       } else {
@@ -48,18 +85,22 @@ export const getCases = (dengueData, year) => {
       }
 
       // get data for latest year
-      if (casesPrevious[el.Muncity] && el.Year === "2022") {
+      if (casesPrevious[el.Muncity] && el.Year === todayYear) {
         casesPrevious[el.Muncity] += 1;
-      } else if (el.Year === "2022") {
+      } else if (el.Year === todayYear) {
         casesPrevious[el.Muncity] = 1;
       }
+
+      // get data for age group cases
+      const ageGroupName = getAgeGroup(el.AgeYears);
+      getAgeGroupCases(casesAgeGroup, el, ageGroupName);
     }
   } else {
     const yearData = dengueData.filter(
       d => d.Year === year || parseInt(d.Year) === parseInt(year) - 1
     );
-    // count occurences of cases for muncities on specific year
     for (const el of yearData) {
+      // count occurences of cases for muncities on specific year
       if (el.Year === year)
         if (casesCount[el.Muncity]) {
           casesCount[el.Muncity] += 1;
@@ -74,8 +115,14 @@ export const getCases = (dengueData, year) => {
           casesPrevious[el.Muncity] = 1;
         }
       }
+
+      // get data for age group cases
+      const ageGroupName = getAgeGroup(el.AgeYears);
+      if (el.Year === year) {
+        getAgeGroupCases(casesAgeGroup, el, ageGroupName);
+      }
     }
   }
 
-  return { casesCount, casesPrevious };
+  return { casesCount, casesPrevious, casesAgeGroup };
 };

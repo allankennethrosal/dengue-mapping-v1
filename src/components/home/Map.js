@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import "leaflet/dist/leaflet.css";
 import {
   MapContainer,
@@ -19,13 +19,20 @@ const Map = () => {
     dengueData,
     setMuncityCasesCount,
     setPrevYearCase,
+    setAgeChildrenCases,
+    setAgeYouthCases,
+    setAgeAdultsCases,
+    setAgeSeniorsCases,
     mapFilters: { year }
   } = useContext(MapContext);
   const [layerSelected, setLayerSelected] = useState("");
   const centerLoc = [8.323365, 123.686847];
 
   // get all cases count, lowest and highest cases
-  const { casesCount, casesPrevious } = getCases(dengueData, year);
+  const { casesCount, casesPrevious, casesAgeGroup } = getCases(
+    dengueData,
+    year
+  );
   const casesValues = Object.values(casesCount);
   const maxCasesCount = Math.max(...casesValues);
   const minCasesCount = Math.min(...casesValues);
@@ -52,27 +59,54 @@ const Map = () => {
     )[0];
     layer.options.fillOpacity =
       muncityCases === 0 || muncityCases === undefined ? 0 : rangeCases.opacity;
-    // layer.options.fillColor =
-    //   muncityCases === 0 || muncityCases === undefined
-    //     ? "#ccc"
-    //     : rangeCases.color;
     layer.on({
       click: onLayerClick
     });
   };
 
-  const numberOfCases = casesCount[muncity.toUpperCase()];
-  const previousCases = casesPrevious[muncity.toUpperCase()];
-  if (numberOfCases) {
-    setMuncityCasesCount(numberOfCases);
-  } else {
-    setMuncityCasesCount(0);
-  }
-  if (previousCases) {
-    setPrevYearCase(previousCases);
-  } else {
-    setPrevYearCase(0);
-  }
+  const setCasesData = useCallback(
+    (numberOfCases, previousCases, ageGroupCases) => {
+      // set muncityCasesCount
+      if (numberOfCases) {
+        setMuncityCasesCount(numberOfCases);
+      } else {
+        setMuncityCasesCount(0);
+      }
+      // set prevYearCase
+      if (previousCases) {
+        setPrevYearCase(previousCases);
+      } else {
+        setPrevYearCase(0);
+      }
+      // set ageGroupCases
+      if (ageGroupCases) {
+        setAgeChildrenCases(ageGroupCases.children);
+        setAgeYouthCases(ageGroupCases.youth);
+        setAgeAdultsCases(ageGroupCases.adults);
+        setAgeSeniorsCases(ageGroupCases.seniors);
+      } else {
+        setAgeChildrenCases(0);
+        setAgeYouthCases(0);
+        setAgeAdultsCases(0);
+        setAgeSeniorsCases(0);
+      }
+    },
+    [
+      setMuncityCasesCount,
+      setPrevYearCase,
+      setAgeChildrenCases,
+      setAgeYouthCases,
+      setAgeAdultsCases,
+      setAgeSeniorsCases
+    ]
+  );
+
+  useEffect(() => {
+    const numberOfCases = casesCount[muncity.toUpperCase()];
+    const previousCases = casesPrevious[muncity.toUpperCase()];
+    const ageGroupCases = casesAgeGroup[muncity.toUpperCase()];
+    setCasesData(numberOfCases, previousCases, ageGroupCases);
+  }, [casesCount, casesPrevious, casesAgeGroup, muncity, setCasesData]);
 
   return (
     <>
