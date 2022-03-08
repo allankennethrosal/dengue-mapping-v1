@@ -13,24 +13,24 @@ export const MapProvider = props => {
   const [ageYouthCases, setAgeYouthCases] = useState(0);
   const [ageAdultsCases, setAgeAdultsCases] = useState(0);
   const [ageSeniorsCases, setAgeSeniorsCases] = useState(0);
-  const [genderMaleCases, setGenderMaleCases] = useState(0);
-  const [genderFemaleCases, setGenderFemaleCases] = useState(0);
 
-  const [mapFilters, setMapFilters] = useState({
-    year: "All", // All - "2014-2020"
-    ageGroup: [
-      // true - active, false - inactive
-      true, // children
-      true, // youth
-      true, // adults
-      true // seniors
-    ],
-    gender: [
-      // true - active, false - inactive
-      true, // male
-      true // female
-    ]
-  });
+  const [ageGroupFilter, setAgeGroupFilter] = useState([
+    // true - active, false - inactive
+    true, // children
+    true, // youth
+    true, // adults
+    true // seniors
+  ]);
+  const [genderFilter, setGenderFilter] = useState(
+    // true - active, false - inactive
+    true, // male
+    true // female
+  );
+
+  const [mapKey, setMapKey] = useState(Math.random());
+  const refreshMap = () => {
+    setMapKey(Math.random());
+  };
 
   return (
     <MapContext.Provider
@@ -38,8 +38,6 @@ export const MapProvider = props => {
         dengueData: dengueData.data,
         prevYearCase,
         setPrevYearCase,
-        mapFilters,
-        setMapFilters,
         muncity,
         setMuncity,
         province,
@@ -56,10 +54,12 @@ export const MapProvider = props => {
         setAgeYouthCases,
         setAgeAdultsCases,
         setAgeSeniorsCases,
-        genderMaleCases,
-        setGenderMaleCases,
-        genderFemaleCases,
-        setGenderFemaleCases
+        ageGroupFilter,
+        setAgeGroupFilter,
+        genderFilter,
+        setGenderFilter,
+        mapKey,
+        refreshMap
       }}
     >
       {props.children}

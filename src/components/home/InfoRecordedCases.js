@@ -2,11 +2,7 @@ import React, { useContext } from "react";
 import { MapContext } from "../../context/MapContext";
 
 const InfoSectionRecordedCases = () => {
-  const {
-    muncityCasesCount,
-    prevYearCase,
-    mapFilters: { year }
-  } = useContext(MapContext);
+  const { muncityCasesCount, prevYearCase, year } = useContext(MapContext);
   const comparedCases = parseInt(muncityCasesCount) - parseInt(prevYearCase);
 
   return (

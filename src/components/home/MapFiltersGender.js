@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { MapFilterContext } from "../../context/MapFilterContext";
 
 const MapFiltersGender = () => {
-  const [maleCheck, setMaleCheck] = useState(true);
-  const [femaleCheck, setFemaleCheck] = useState(true);
+  const { maleCheck, setMaleCheck, femaleCheck, setFemaleCheck } = useContext(
+    MapFilterContext
+  );
 
   return (
     <>

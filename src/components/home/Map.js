@@ -13,6 +13,7 @@ import { MapContext } from "../../context/MapContext";
 
 const Map = () => {
   const {
+    year,
     muncity,
     setMuncity,
     setProvince,
@@ -23,7 +24,7 @@ const Map = () => {
     setAgeYouthCases,
     setAgeAdultsCases,
     setAgeSeniorsCases,
-    mapFilters: { year }
+    mapKey
   } = useContext(MapContext);
   const [layerSelected, setLayerSelected] = useState("");
   const centerLoc = [8.323365, 123.686847];
@@ -111,7 +112,7 @@ const Map = () => {
   return (
     <>
       <MapContainer
-        key={year}
+        key={mapKey}
         center={centerLoc}
         zoom={10}
         className="w-full h-full z-0"

@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { MapFilterContext } from "../../context/MapFilterContext";
 
 const MapFiltersAge = () => {
-  const [ageCheckChildren, setAgeCheckChildren] = useState(true);
-  const [ageCheckYouth, setAgeCheckYouth] = useState(true);
-  const [ageCheckAdults, setAgeCheckAdults] = useState(true);
-  const [ageCheckSeniors, setAgeCheckSeniors] = useState(true);
+  const {
+    ageCheckChildren,
+    setAgeCheckChildren,
+    ageCheckYouth,
+    setAgeCheckYouth,
+    ageCheckAdults,
+    setAgeCheckAdults,
+    ageCheckSeniors,
+    setAgeCheckSeniors
+  } = useContext(MapFilterContext);
 
   return (
     <>
