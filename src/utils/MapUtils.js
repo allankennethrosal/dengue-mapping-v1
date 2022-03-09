@@ -49,7 +49,7 @@ export const getAgeGroup = ageString => {
 };
 
 // get cases from each muncity by age group
-const getAgeGroupCases = (casesAgeGroup, el, ageGroupName) => {
+export const getAgeGroupCases = (casesAgeGroup, el, ageGroupName) => {
   if (casesAgeGroup[el.Muncity]) {
     if (casesAgeGroup[el.Muncity][ageGroupName]) {
       casesAgeGroup[el.Muncity][ageGroupName] += 1;
@@ -68,7 +68,13 @@ const getAgeGroupCases = (casesAgeGroup, el, ageGroupName) => {
 };
 
 // get the number of cases for each muncity
-export const getCases = (dengueData, year) => {
+export const getCases = (dengueData, year, filters) => {
+  const { ageFilter } = filters;
+  const filteredData = dengueData.filter(d => {
+    const ageGroup = getAgeGroup(d.AgeYears);
+    return ageFilter[ageGroup];
+  });
+
   const casesCount = {};
   const casesPrevious = {};
   const casesAgeGroup = {};
@@ -76,7 +82,7 @@ export const getCases = (dengueData, year) => {
   const todayYear = d.getFullYear().toString();
 
   if (year === "All") {
-    for (const el of dengueData) {
+    for (const el of filteredData) {
       // count all occurences of cases for muncities
       if (casesCount[el.Muncity]) {
         casesCount[el.Muncity] += 1;
@@ -96,7 +102,7 @@ export const getCases = (dengueData, year) => {
       getAgeGroupCases(casesAgeGroup, el, ageGroupName);
     }
   } else {
-    const yearData = dengueData.filter(
+    const yearData = filteredData.filter(
       d => d.Year === year || parseInt(d.Year) === parseInt(year) - 1
     );
     for (const el of yearData) {
@@ -126,3 +132,15 @@ export const getCases = (dengueData, year) => {
 
   return { casesCount, casesPrevious, casesAgeGroup };
 };
+
+// const filteredMuncityCases = filterAgeData(
+//   muncityCases,
+//   casesAgeGroup[muncityName.toUpperCase()],
+//   {
+//     ageCheckChildren,
+//     ageCheckYouth,
+//     ageCheckAdults,
+//     ageCheckSeniors
+//   }
+// );
+// console.log(filteredMuncityCases);

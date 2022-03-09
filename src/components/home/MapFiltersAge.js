@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { MapFilterContext } from "../../context/MapFilterContext";
+import { MapContext } from "../../context/MapContext";
 
 const MapFiltersAge = () => {
   const {
@@ -12,6 +13,12 @@ const MapFiltersAge = () => {
     ageCheckSeniors,
     setAgeCheckSeniors
   } = useContext(MapFilterContext);
+  const { refreshMap } = useContext(MapContext);
+
+  const handleAgeCheckChange = (checkAgeValue, setCheckAgeValue) => {
+    setCheckAgeValue(!checkAgeValue);
+    refreshMap();
+  };
 
   return (
     <>
@@ -23,7 +30,9 @@ const MapFiltersAge = () => {
           <input
             type="checkbox"
             checked={ageCheckChildren}
-            onChange={() => setAgeCheckChildren(!ageCheckChildren)}
+            onChange={() =>
+              handleAgeCheckChange(ageCheckChildren, setAgeCheckChildren)
+            }
           />
           <span className="ml-2">Children (00-14 years)</span>
         </label>
@@ -31,7 +40,9 @@ const MapFiltersAge = () => {
           <input
             type="checkbox"
             checked={ageCheckYouth}
-            onChange={() => setAgeCheckYouth(!ageCheckYouth)}
+            onChange={() =>
+              handleAgeCheckChange(ageCheckYouth, setAgeCheckYouth)
+            }
           />
           <span className="ml-2">Youth (15-24 years)</span>
         </label>
@@ -39,7 +50,9 @@ const MapFiltersAge = () => {
           <input
             type="checkbox"
             checked={ageCheckAdults}
-            onChange={() => setAgeCheckAdults(!ageCheckAdults)}
+            onChange={() =>
+              handleAgeCheckChange(ageCheckAdults, setAgeCheckAdults)
+            }
           />
           <span className="ml-2">Adults (25-64 years)</span>
         </label>
@@ -47,7 +60,9 @@ const MapFiltersAge = () => {
           <input
             type="checkbox"
             checked={ageCheckSeniors}
-            onChange={() => setAgeCheckSeniors(!ageCheckSeniors)}
+            onChange={() =>
+              handleAgeCheckChange(ageCheckSeniors, setAgeCheckSeniors)
+            }
           />
           <span className="ml-2">Seniors (65 years and over)</span>
         </label>

@@ -84,9 +84,8 @@ const InfoSectionChartAgeGroup = () => {
           ageAdultsCases === 0 &&
           ageSeniorsCases === 0 ? (
             // display gray circle if no data
-            <div className="flex md:flex-col flex-row md:space-y-3 space-y-0 md:space-x-0 space-x-5 justify-center items-center w-full">
-              <div className="h-32 w-32 bg-gray-300 rounded-full border-2 border-gray-400"></div>
-              <p className="text-gray-500 text-center">No data</p>
+            <div className="w-full">
+              <p className="text-gray-500 text-center">No data to show</p>
             </div>
           ) : (
             <Pie data={data} options={options} height={null} width={null} />

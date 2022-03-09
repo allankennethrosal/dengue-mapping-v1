@@ -10,13 +10,13 @@ import {
 import dataGeoJson from "../../data/municities-province-ph104200000.0.1.json";
 import { getCases, getRanges } from "../../utils/MapUtils";
 import { MapContext } from "../../context/MapContext";
+import { MapFilterContext } from "../../context/MapFilterContext";
 
 const Map = () => {
   const {
     year,
     muncity,
     setMuncity,
-    setProvince,
     dengueData,
     setMuncityCasesCount,
     setPrevYearCase,
@@ -26,13 +26,28 @@ const Map = () => {
     setAgeSeniorsCases,
     mapKey
   } = useContext(MapContext);
+  const {
+    ageCheckChildren,
+    ageCheckYouth,
+    ageCheckAdults,
+    ageCheckSeniors
+  } = useContext(MapFilterContext);
   const [layerSelected, setLayerSelected] = useState("");
   const centerLoc = [8.323365, 123.686847];
+  const filters = {
+    ageFilter: {
+      children: ageCheckChildren,
+      youth: ageCheckYouth,
+      adults: ageCheckAdults,
+      seniors: ageCheckSeniors
+    }
+  };
 
   // get all cases count, lowest and highest cases
   const { casesCount, casesPrevious, casesAgeGroup } = getCases(
     dengueData,
-    year
+    year,
+    filters
   );
   const casesValues = Object.values(casesCount);
   const maxCasesCount = Math.max(...casesValues);
@@ -45,11 +60,9 @@ const Map = () => {
   // events for each geojson layer
   const onEachLayer = (muncity, layer) => {
     const muncityName = muncity.properties.ADM3_EN;
-    const provinceName = muncity.properties.ADM2_EN;
 
     const onLayerClick = () => {
       setMuncity(muncityName);
-      setProvince(provinceName);
       setLayerSelected(muncityName);
       layer.bringToFront();
     };
