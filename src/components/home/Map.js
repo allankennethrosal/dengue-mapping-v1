@@ -26,29 +26,29 @@ const Map = () => {
     setAgeSeniorsCases,
     mapKey
   } = useContext(MapContext);
-  const {
-    ageCheckChildren,
-    ageCheckYouth,
-    ageCheckAdults,
-    ageCheckSeniors
-  } = useContext(MapFilterContext);
+  const value = useContext(MapFilterContext);
   const [layerSelected, setLayerSelected] = useState("");
   const centerLoc = [8.323365, 123.686847];
   const filters = {
     ageFilter: {
-      children: ageCheckChildren,
-      youth: ageCheckYouth,
-      adults: ageCheckAdults,
-      seniors: ageCheckSeniors
+      children: value.ageCheckChildren,
+      youth: value.ageCheckYouth,
+      adults: value.ageCheckAdults,
+      seniors: value.ageCheckSeniors
+    },
+    genderFilter: {
+      M: value.maleCheck,
+      F: value.femaleCheck
     }
   };
 
-  // get all cases count, lowest and highest cases
+  // get all cases, previous/latest year cases, age group and gender cases
   const { casesCount, casesPrevious, casesAgeGroup } = getCases(
     dengueData,
     year,
     filters
   );
+  // get lowest and highest case muncity for computing interval/range
   const casesValues = Object.values(casesCount);
   const maxCasesCount = Math.max(...casesValues);
   const minCasesCount = Math.min(...casesValues);

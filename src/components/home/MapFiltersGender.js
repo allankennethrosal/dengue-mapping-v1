@@ -1,10 +1,16 @@
 import React, { useContext } from "react";
 import { MapFilterContext } from "../../context/MapFilterContext";
+import { MapContext } from "../../context/MapContext";
 
 const MapFiltersGender = () => {
   const { maleCheck, setMaleCheck, femaleCheck, setFemaleCheck } = useContext(
     MapFilterContext
   );
+  const { refreshMap } = useContext(MapContext);
+  const handleGenderCheckChange = (genderCheck, setGenderCheck) => {
+    setGenderCheck(!genderCheck);
+    refreshMap();
+  };
 
   return (
     <>
@@ -15,7 +21,7 @@ const MapFiltersGender = () => {
             <input
               type="checkbox"
               checked={maleCheck}
-              onChange={() => setMaleCheck(!maleCheck)}
+              onChange={() => handleGenderCheckChange(maleCheck, setMaleCheck)}
             />
             <span className="ml-2">Male</span>
           </label>
@@ -23,7 +29,9 @@ const MapFiltersGender = () => {
             <input
               type="checkbox"
               checked={femaleCheck}
-              onChange={() => setFemaleCheck(!femaleCheck)}
+              onChange={() =>
+                handleGenderCheckChange(femaleCheck, setFemaleCheck)
+              }
             />
             <span className="ml-2">Female</span>
           </label>

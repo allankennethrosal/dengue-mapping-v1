@@ -69,10 +69,10 @@ export const getAgeGroupCases = (casesAgeGroup, el, ageGroupName) => {
 
 // get the number of cases for each muncity
 export const getCases = (dengueData, year, filters) => {
-  const { ageFilter } = filters;
+  const { ageFilter, genderFilter } = filters;
   const filteredData = dengueData.filter(d => {
     const ageGroup = getAgeGroup(d.AgeYears);
-    return ageFilter[ageGroup];
+    return ageFilter[ageGroup] && genderFilter[d.Sex];
   });
 
   const casesCount = {};
