@@ -1,5 +1,4 @@
 import React, { useState, createContext } from "react";
-import dengueData from "../data/dengue-cases-misocc.json";
 
 export const MapContext = createContext();
 
@@ -20,7 +19,6 @@ export const MapProvider = props => {
   return (
     <MapContext.Provider
       value={{
-        dengueData: dengueData.data,
         prevYearCase,
         setPrevYearCase,
         muncity,

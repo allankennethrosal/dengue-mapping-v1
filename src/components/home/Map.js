@@ -11,13 +11,13 @@ import dataGeoJson from "../../data/municities-province-ph104200000.0.1.json";
 import { getCases, getRanges } from "../../utils/MapUtils";
 import { MapContext } from "../../context/MapContext";
 import { MapFilterContext } from "../../context/MapFilterContext";
+import { GlobalContext } from "../../context/GlobalContext";
 
 const Map = () => {
   const {
     year,
     muncity,
     setMuncity,
-    dengueData,
     setMuncityCasesCount,
     setPrevYearCase,
     setAgeChildrenCases,
@@ -26,6 +26,7 @@ const Map = () => {
     setAgeSeniorsCases,
     mapKey
   } = useContext(MapContext);
+  const { dengueData } = useContext(GlobalContext);
   const value = useContext(MapFilterContext);
   const [layerSelected, setLayerSelected] = useState("");
   const centerLoc = [8.323365, 123.686847];

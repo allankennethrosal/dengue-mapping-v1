@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { HashRouter } from "react-router-dom";
+import { MapFilterProvider } from "./context/GlobalContext";
 
 ReactDOM.render(
-  <HashRouter hashType="slash">
-    <App />
-  </HashRouter>,
+  <MapFilterProvider>
+    <HashRouter hashType="slash">
+      <App />
+    </HashRouter>
+  </MapFilterProvider>,
   document.getElementById("root")
 );
 
