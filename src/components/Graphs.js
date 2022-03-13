@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
-import AnnualTrendChart from "../components/graphs/AnnualTrendChart";
+import AnnualTrendChart from "./graphs/AnnualTrendChart";
+import AnnualTrendChartMuncity from "./graphs/AnnualTrendChartMonthly";
 
 const Graphs = () => {
   return (
@@ -12,7 +13,7 @@ const Graphs = () => {
             <AnnualTrendChart />
           </div>
           <div className="bg-white rounded-lg md:w-1/2 w-full p-3">
-            <AnnualTrendChart />
+            <AnnualTrendChartMuncity />
           </div>
         </div>
       </div>

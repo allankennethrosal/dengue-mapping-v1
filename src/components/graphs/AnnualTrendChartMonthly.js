@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -23,9 +23,10 @@ ChartJS.register(
   Legend
 );
 
-const AnnualTrendChart = () => {
+const AnnualTrendChartMonthly = () => {
   const { dengueData } = useContext(GlobalContext);
   const annualCases = getAnnualCases(dengueData);
+  const [muncity, setMuncity] = useState("OZAMIZ CITY");
 
   const data = {
     labels: Object.keys(annualCases),
@@ -47,9 +48,14 @@ const AnnualTrendChart = () => {
       },
       title: {
         display: true,
-        text: "Recorded Dengue Cases Trend Analysis (Annual)"
+        position: "top",
+        text: `${muncity} Recorded Dengue Cases Trend Analysis (Monthly)`
       }
     }
+  };
+
+  const handleMuncitySelect = selectedMuncity => {
+    setMuncity(selectedMuncity);
   };
 
   return (
@@ -76,13 +82,11 @@ const AnnualTrendChart = () => {
             />
           </svg>
         </label>
-
         <select
           className="flex-1 font-bold text-gray-900 p-3 outline-none cursor-pointer"
-          value="ALL"
-          onChange={e => console.log(e)}
+          value={muncity}
+          onChange={e => handleMuncitySelect(e.target.value)}
         >
-          <option value="ALL">ALL MUNCITIES</option>
           <option value="OZAMIZ CITY">OZAMIZ CITY</option>
           <option value="TANGUB CITY">TANGUB CITY</option>
         </select>
@@ -94,4 +98,4 @@ const AnnualTrendChart = () => {
   );
 };
 
-export default AnnualTrendChart;
+export default AnnualTrendChartMonthly;
