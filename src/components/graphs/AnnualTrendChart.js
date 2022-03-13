@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,7 +11,10 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { GlobalContext } from "../../context/GlobalContext";
-import { getAnnualCases } from "../../utils/GraphUtils";
+import {
+  getAnnualCases,
+  getAnnualCasesOfMuncity
+} from "../../utils/GraphUtils";
 
 ChartJS.register(
   CategoryScale,
@@ -24,8 +27,16 @@ ChartJS.register(
 );
 
 const AnnualTrendChart = () => {
-  const { dengueData } = useContext(GlobalContext);
-  const annualCases = getAnnualCases(dengueData);
+  const { dengueData, listMuncities } = useContext(GlobalContext);
+  const [muncity, setMuncity] = useState("ALL");
+  const annualCases =
+    muncity === "ALL"
+      ? getAnnualCases(dengueData)
+      : getAnnualCasesOfMuncity(muncity, dengueData);
+
+  const handleMuncitySelect = selectedMuncity => {
+    setMuncity(selectedMuncity);
+  };
 
   const data = {
     labels: Object.keys(annualCases),
@@ -46,8 +57,8 @@ const AnnualTrendChart = () => {
         position: "bottom"
       },
       title: {
-        display: true,
-        text: "Recorded Dengue Cases Trend Analysis (Annual)"
+        display: false,
+        text: ``
       }
     }
   };
@@ -79,15 +90,21 @@ const AnnualTrendChart = () => {
 
         <select
           className="flex-1 font-bold text-gray-900 p-3 outline-none cursor-pointer"
-          value="ALL"
-          onChange={e => console.log(e)}
+          value={muncity}
+          onChange={e => handleMuncitySelect(e.target.value)}
         >
           <option value="ALL">ALL MUNCITIES</option>
-          <option value="OZAMIZ CITY">OZAMIZ CITY</option>
-          <option value="TANGUB CITY">TANGUB CITY</option>
+          {listMuncities.map(m => (
+            <option key={m} value={m}>
+              {m}
+            </option>
+          ))}
         </select>
       </div>
       <div className="mt-3">
+        <p className="text-xs text-gray-900 text-center">
+          Recorded Dengue Cases Trend Analysis <b>(Annual)</b>
+        </p>
         <Line options={options} data={data} />
       </div>
     </>
