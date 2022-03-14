@@ -9,10 +9,10 @@ const Graphs = () => {
       <div className="flex flex-col bg-gray-100 min-h-screen">
         <Navbar />
         <div className="flex md:flex-row flex-col md:space-x-3 space-x-0 md:space-y-0 space-y-3 justify-center items-center p-3">
-          <div className="bg-white rounded-lg md:w-1/2 w-full p-3">
+          <div className="bg-white rounded-lg md:w-1/2 w-full p-3 drop-shadow-md">
             <AnnualTrendChart />
           </div>
-          <div className="bg-white rounded-lg md:w-1/2 w-full p-3">
+          <div className="bg-white rounded-lg md:w-1/2 w-full p-3 drop-shadow-md">
             <AnnualTrendChartMuncity />
           </div>
         </div>
