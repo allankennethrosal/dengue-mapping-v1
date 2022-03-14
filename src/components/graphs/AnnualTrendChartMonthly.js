@@ -29,6 +29,7 @@ const AnnualTrendChartMonthly = () => {
   const [muncity, setMuncity] = useState("OZAMIS CITY");
   const [year, setYear] = useState("2018");
   const monthlyCases = getMonthlyCases(muncity, year, dengueData);
+
   const handleMuncitySelect = selectedMuncity => {
     setMuncity(selectedMuncity);
   };

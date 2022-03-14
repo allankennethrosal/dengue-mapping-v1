@@ -1,8 +1,10 @@
 export const getYears = () => {
   const caseObject = {};
   const d = new Date();
+  // set present year to 2022 if local date is not set correctly
   const todayYear = d.getFullYear() < 2022 ? 2022 : d.getFullYear();
 
+  // get all years from 2014 up to the present year
   for (let i = 2014; i <= todayYear; i++) {
     i = i.toString();
     caseObject[i] = 0;
@@ -14,7 +16,7 @@ export const getYears = () => {
 export const getAnnualCases = dengueData => {
   const annualCases = getYears();
 
-  // get number of cases per year
+  // get number of cases per year in all muncities
   for (const d of dengueData) {
     if (annualCases[d.Year]) {
       annualCases[d.Year] += 1;
@@ -29,7 +31,7 @@ export const getAnnualCases = dengueData => {
 export const getAnnualCasesOfMuncity = (muncity, dengueData) => {
   const annualCasesMuncity = getYears();
 
-  // get number of cases per year
+  // get number of cases per year in a specified muncity
   for (const d of dengueData) {
     if (annualCasesMuncity[d.Year] && d.Muncity === muncity) {
       annualCasesMuncity[d.Year] += 1;
@@ -58,7 +60,7 @@ export const getMonthlyCases = (muncity, year, dengueData) => {
   };
   const monthNames = Object.keys(monthlyCases);
 
-  // get number of cases per year
+  // get number of cases per month in a specified year
   for (const d of dengueData) {
     const date = new Date(d.DAdmit);
     const monthName = monthNames[date.getMonth()];
