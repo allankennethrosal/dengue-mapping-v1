@@ -39,9 +39,9 @@ const TableCases = () => {
               </Td>
               <Td className="text-sm text-center p-1">{d.DateOfEntry}</Td>
               <Td className="text-sm text-center p-1">
-                <button className="flex justify-center items-center text-white bg-gray-600 hover:bg-gray-700 p-1 rounded">
+                <button className="flex justify-center items-center text-white bg-blue-500 hover:bg-blue-700 p-1 rounded">
                   <svg
-                    class="h-6 w-6 text-white"
+                    className="h-6 w-6 text-white"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
