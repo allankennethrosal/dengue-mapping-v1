@@ -6,7 +6,7 @@ const InfoSectionYearControl = () => {
 
   return (
     <>
-      <div className="flex justify-start items-center bg-gray-800 rounded-lg">
+      <div className="flex justify-start items-center bg-gray-800 rounded-lg drop-shadow-md">
         <div className="p-3 border-r-2 border-gray-600">
           <svg
             className="h-8 w-8 text-gray-100"

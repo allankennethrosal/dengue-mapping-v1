@@ -55,47 +55,50 @@ export const NavbarMobile = () => {
     setIfNavOpen(!ifNavOpen);
   };
   return (
-    <div
-      className="flex justify-between items-center bg-gray-900 md:px-5 px-3 py-4 w-full"
-      style={{ height: 64 }}
-    >
-      <img src={NavbarLogo} className="w-36" alt="Navbar Logo" />
-      <button onClick={toggleOpenNav}>
-        {ifNavOpen ? (
-          <svg
-            className="h-8 w-8 text-white"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {" "}
-            <path stroke="none" d="M0 0h24v24H0z" />{" "}
-            <line x1="18" y1="6" x2="6" y2="18" />{" "}
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        ) : (
-          <svg
-            className="h-8 w-8 text-white"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
+    <>
+      <div
+        className="flex justify-between items-center bg-gray-900 md:px-5 px-3 py-4 w-full z-20"
+        style={{ height: 64 }}
+      >
+        <img src={NavbarLogo} className="w-36" alt="Navbar Logo" />
+        <button onClick={toggleOpenNav}>
+          {ifNavOpen ? (
+            <svg
+              className="h-8 w-8 text-white"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            />
-          </svg>
-        )}
-      </button>
+            >
+              {" "}
+              <path stroke="none" d="M0 0h24v24H0z" />{" "}
+              <line x1="18" y1="6" x2="6" y2="18" />{" "}
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          ) : (
+            <svg
+              className="h-8 w-8 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
+            </svg>
+          )}
+        </button>
+      </div>
+
       <nav
-        className="flex flex-col space-y-2 justify-end fixed top-0 left-0 bg-gray-900 text-gray-100 border-t-2 border-gray-700 w-full h-auto p-3 z-50 transition-all ease-in-out duration-300"
+        className="flex flex-col space-y-2 justify-end fixed top-0 left-0 bg-gray-900 text-gray-100 border-t-2 border-gray-700 w-full h-auto p-3 z-50 transition-all ease-in-out duration-300 rounded-b-lg z-10"
         style={{
           transform: ifNavOpen ? "translateY(64px)" : "translateY(-100%)"
         }}
@@ -119,7 +122,7 @@ export const NavbarMobile = () => {
           Data Table
         </Link>
       </nav>
-    </div>
+    </>
   );
 };
 

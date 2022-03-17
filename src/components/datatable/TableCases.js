@@ -1,10 +1,18 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import { GlobalContext } from "../../context/GlobalContext";
+import ModalDetails from "./ModalDetails";
 
 const TableCases = () => {
   const { dengueData } = useContext(GlobalContext);
+  const [openModalDetails, setOpenModalDetails] = useState(false);
+  const handleModalDetailsOpen = () => {
+    setOpenModalDetails(true);
+  };
+  const handleModalDetailsClose = () => {
+    setOpenModalDetails(false);
+  };
 
   return (
     <>
@@ -39,7 +47,10 @@ const TableCases = () => {
               </Td>
               <Td className="text-sm text-center p-1">{d.DateOfEntry}</Td>
               <Td className="text-sm text-center p-1">
-                <button className="flex justify-center items-center text-white bg-blue-500 hover:bg-blue-700 p-1 rounded">
+                <button
+                  className="flex justify-center items-center text-white bg-blue-500 hover:bg-blue-700 p-1 rounded"
+                  onClick={handleModalDetailsOpen}
+                >
                   <svg
                     className="h-6 w-6 text-white"
                     width="24"
@@ -58,13 +69,20 @@ const TableCases = () => {
                       transform="rotate(180 12 12)"
                     />
                   </svg>
-                  <label className="sm:hidden block mx-1">More</label>
+                  <label className="sm:hidden block mx-1 cursor-pointer">
+                    More
+                  </label>
                 </button>
               </Td>
             </Tr>
           ))}
         </Tbody>
       </Table>
+
+      <ModalDetails
+        open={openModalDetails}
+        handleClose={handleModalDetailsClose}
+      />
     </>
   );
 };

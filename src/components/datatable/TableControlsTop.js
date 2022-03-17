@@ -10,7 +10,7 @@ const TableControlsTop = () => {
               Search:
             </label>
             <input
-              className="text-sm md:w-auto w-full p-2 border-2 border-gray-100 rounded-md outline-none focus:border-gray-300"
+              className="text-sm md:w-auto w-full md:p-2 p-1 border-2 border-gray-100 rounded-md outline-none focus:border-gray-300"
               id="search"
               type="text"
               placeholder="3010 records..."
@@ -22,7 +22,7 @@ const TableControlsTop = () => {
             </label>
             <select
               id="sort"
-              className="text-sm ml-3 mr-1 md:w-auto w-full p-2 border-2 border-gray-100 rounded-md outline-none focus:border-gray-300 cursor-pointer"
+              className="text-sm ml-3 mr-1 md:w-auto w-full md:p-2 p-1 border-2 border-gray-100 rounded-md outline-none focus:border-gray-300 cursor-pointer"
             >
               <option value="DAdmit">Date Admitted</option>
               <option value="DEntry">Date of Entry</option>
@@ -32,7 +32,7 @@ const TableControlsTop = () => {
 
             <select
               id="asc-desc"
-              className="text-sm md:w-auto w-full p-2 border-2 border-gray-100 rounded-md outline-none focus:border-gray-300 cursor-pointer"
+              className="text-sm md:w-auto w-full md:p-2 p-1 border-2 border-gray-100 rounded-md outline-none focus:border-gray-300 cursor-pointer"
             >
               <option value="DAdmit">Ascending</option>
               <option value="DEntry">Descending</option>
@@ -43,17 +43,17 @@ const TableControlsTop = () => {
         <div className="flex justify-end items-center w-full">
           <div className="flex justify-start items-center md:w-auto w-full">
             <label className="text-sm" htmlFor="year">
-              Year
+              Year:
             </label>
             <select
               id="year"
-              className="text-sm ml-3 mr-1 md:w-auto w-full p-2 border-2 border-gray-100 rounded-md outline-none focus:border-gray-300 cursor-pointer"
+              className="text-sm ml-3 mr-1 md:w-auto w-full md:p-2 p-1 border-2 border-gray-100 rounded-md outline-none focus:border-gray-300 cursor-pointer"
             >
               <option value="DAdmit">2022</option>
-              <option value="DEntry">All Years</option>
+              <option value="DEntry">All</option>
             </select>
           </div>
-          <button className="flex justify-center items-center text-white font-bold bg-green-700 hover:bg-green-900 md:w-auto w-full py-2 px-3 rounded">
+          <button className="flex justify-center items-center text-white font-bold bg-green-700 hover:bg-green-900 md:w-auto w-full md:py-2 py-1 px-3 rounded">
             <svg
               className="h-6 w-6 text-white"
               fill="none"

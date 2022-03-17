@@ -7,7 +7,7 @@ const InfoSectionRecordedCases = () => {
 
   return (
     <>
-      <div className="flex justify-start items-center w-full bg-gray-100 p-3 rounded-lg">
+      <div className="flex justify-start items-center w-full bg-gray-100 p-3 rounded-lg drop-shadow-md">
         <div>
           <svg
             className="h-16 w-16 text-gray-900"
@@ -35,7 +35,7 @@ const InfoSectionRecordedCases = () => {
           </p>
         </div>
       </div>
-      <div className="flex justify-start items-center w-full bg-gray-100 p-3 rounded-lg">
+      <div className="flex justify-start items-center w-full bg-gray-100 p-3 rounded-lg drop-shadow-md">
         <div>
           <svg
             className="h-16 w-16 text-gray-900"
