@@ -7,7 +7,9 @@ import ModalDetails from "./ModalDetails";
 const TableCases = () => {
   const { dengueData } = useContext(GlobalContext);
   const [openModalDetails, setOpenModalDetails] = useState(false);
-  const handleModalDetailsOpen = () => {
+  const [selectedData, setSelectedData] = useState(null);
+  const handleModalDetailsOpen = d => {
+    setSelectedData(d);
     setOpenModalDetails(true);
   };
   const handleModalDetailsClose = () => {
@@ -49,7 +51,7 @@ const TableCases = () => {
               <Td className="text-sm text-center p-1">
                 <button
                   className="flex justify-center items-center text-white bg-blue-500 hover:bg-blue-700 p-1 rounded"
-                  onClick={handleModalDetailsOpen}
+                  onClick={() => handleModalDetailsOpen(d)}
                 >
                   <svg
                     className="h-6 w-6 text-white"
@@ -79,10 +81,13 @@ const TableCases = () => {
         </Tbody>
       </Table>
 
-      <ModalDetails
-        open={openModalDetails}
-        handleClose={handleModalDetailsClose}
-      />
+      {selectedData && (
+        <ModalDetails
+          open={openModalDetails}
+          handleClose={handleModalDetailsClose}
+          selectedData={selectedData}
+        />
+      )}
     </>
   );
 };

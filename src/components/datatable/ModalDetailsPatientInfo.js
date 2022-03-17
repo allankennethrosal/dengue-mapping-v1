@@ -15,7 +15,15 @@ import React from "react";
   Barangay
   Streetpurok
 */
-const ModalDetailsPatientInfo = () => {
+const ModalDetailsPatientInfo = props => {
+  const { selectedData } = props;
+  const sex =
+    selectedData.Sex === "M" || selectedData.Sex === "F"
+      ? selectedData.Sex === "M"
+        ? "Male"
+        : "Female"
+      : selectedData.Sex;
+
   return (
     <>
       <div className="flex md:flex-row flex-col md:space-x-5 space-x-0 md:space-y-0 space-y-5 w-full">
@@ -29,7 +37,7 @@ const ModalDetailsPatientInfo = () => {
               <input
                 className="p-3 rounded-lg font-bold w-full"
                 disabled
-                value="14"
+                value={selectedData.AgeYears}
               ></input>
             </div>
             <div className="flex flex-1 flex-col justify-start items-start space-y-3">
@@ -37,7 +45,7 @@ const ModalDetailsPatientInfo = () => {
               <input
                 className="p-3 rounded-lg font-bold w-full"
                 disabled
-                value="14"
+                value={selectedData.AgeMons}
               ></input>
             </div>
             <div className="flex flex-1 flex-col justify-start items-start space-y-3">
@@ -45,7 +53,7 @@ const ModalDetailsPatientInfo = () => {
               <input
                 className="p-3 rounded-lg font-bold w-full"
                 disabled
-                value="14"
+                value={selectedData.AgeDays}
               ></input>
             </div>
           </div>
@@ -56,7 +64,7 @@ const ModalDetailsPatientInfo = () => {
               <input
                 className="p-3 rounded-lg font-bold sm:w-auto w-full"
                 disabled
-                value="Male"
+                value={sex}
               ></input>
             </div>
           </div>
@@ -81,7 +89,7 @@ const ModalDetailsPatientInfo = () => {
               <input
                 className="p-3 rounded-lg w-full font-bold"
                 disabled
-                value="Purok 8"
+                value={selectedData.Streetpurok}
               ></input>
             </div>
             <div className="flex flex-col space-y-3">
@@ -89,7 +97,7 @@ const ModalDetailsPatientInfo = () => {
               <input
                 className="p-3 rounded-lg w-full font-bold"
                 disabled
-                value="San Antonio"
+                value={selectedData.Barangay}
               ></input>
             </div>
             <div className="flex flex-col space-y-3">
@@ -97,7 +105,7 @@ const ModalDetailsPatientInfo = () => {
               <input
                 className="p-3 rounded-lg w-full font-bold"
                 disabled
-                value="Ozamiz City"
+                value={selectedData.Muncity}
               ></input>
             </div>
             <div className="flex flex-col space-y-3">
@@ -105,23 +113,23 @@ const ModalDetailsPatientInfo = () => {
               <input
                 className="p-3 rounded-lg w-full font-bold"
                 disabled
-                value="District 3"
+                value={selectedData.District}
               ></input>
             </div>
             <div className="flex flex-col space-y-3">
-              <label className="text-sm">Province</label>
+              <label className="text-sm">Province:</label>
               <input
                 className="p-3 rounded-lg w-full font-bold"
                 disabled
-                value="Misamis Occidental"
+                value={selectedData.Province}
               ></input>
             </div>
             <div className="flex flex-col space-y-3">
-              <label className="text-sm">Region</label>
+              <label className="text-sm">Region:</label>
               <input
                 className="p-3 rounded-lg w-full font-bold"
                 disabled
-                value="Region X"
+                value={selectedData.Region}
               ></input>
             </div>
           </div>
