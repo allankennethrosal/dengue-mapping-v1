@@ -11,6 +11,20 @@ const TableControlsBottom = props => {
     setStartIndexResult
   } = props;
   const [maxShow, setMaxShow] = useState(10);
+  const handleNextPage = () => {
+    if (startIndexResult + showLimit >= totalResults) {
+      setStartIndexResult(totalResults - showLimit);
+    } else {
+      setStartIndexResult(startIndexResult + showLimit);
+    }
+  };
+  const handlePrevPage = () => {
+    if (startIndexResult - showLimit < 0) {
+      setStartIndexResult(0);
+    } else {
+      setStartIndexResult(startIndexResult - showLimit);
+    }
+  };
 
   useEffect(() => {
     startIndexResult + showLimit > totalResults
@@ -54,8 +68,9 @@ const TableControlsBottom = props => {
 
           <div className="flex justify-start items-center">
             <button
-              className="bg-gray-300 hover:bg-gray-100 p-1 rounded-l"
+              className="bg-white hover:bg-gray-100 p-1 rounded-l"
               onClick={() => setStartIndexResult(0)}
+              disabled={startIndexResult <= 0 ? true : false}
             >
               <svg
                 className="h-6 w-6 text-gray-900"
@@ -72,7 +87,11 @@ const TableControlsBottom = props => {
               </svg>
             </button>
 
-            <button className="bg-gray-300 hover:bg-gray-100 p-1">
+            <button
+              className="bg-white hover:bg-gray-100 p-1"
+              onClick={handlePrevPage}
+              disabled={startIndexResult <= 0 ? true : false}
+            >
               <svg
                 className="h-6 w-6 text-gray-900"
                 width="24"
@@ -92,9 +111,10 @@ const TableControlsBottom = props => {
 
             <button
               className="bg-white hover:bg-gray-100 p-1"
-              onClick={() => {
-                setStartIndexResult(startIndexResult + showLimit);
-              }}
+              onClick={handleNextPage}
+              disabled={
+                startIndexResult + showLimit >= totalResults ? true : false
+              }
             >
               <svg
                 className="h-6 w-6 text-gray-900"
@@ -116,6 +136,9 @@ const TableControlsBottom = props => {
             <button
               className="bg-white hover:bg-gray-100 p-1 rounded-r"
               onClick={() => setStartIndexResult(totalResults - showLimit)}
+              disabled={
+                startIndexResult + showLimit >= totalResults ? true : false
+              }
             >
               <svg
                 className="h-6 w-6 text-gray-900"

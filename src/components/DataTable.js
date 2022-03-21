@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import Navbar from "./Navbar";
 import TableCases from "./datatable/TableCases";
 import TableControlsTop from "./datatable/TableControlsTop";
@@ -12,6 +12,7 @@ const DataTable = () => {
   const [activeData, setActiveData] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [startIndexResult, setStartIndexResult] = useState(0);
+  const tableTopRef = useRef();
 
   useEffect(() => {
     if (searchText === "") {
@@ -29,7 +30,10 @@ const DataTable = () => {
           className="flex flex-col justify-center items-center overflow-hidden"
           style={{ height: "calc(100vh-64px)" }}
         >
-          <div className="bg-white w-full border-b-2 border-gray-100">
+          <div
+            id="table-top"
+            className="bg-white w-full border-b-2 border-gray-100"
+          >
             <TableControlsTop
               searchText={searchText}
               setSearchText={setSearchText}
@@ -37,14 +41,27 @@ const DataTable = () => {
               setStartIndexResult={setStartIndexResult}
             />
           </div>
-          <div className="flex-1 bg-white w-full overflow-y-scroll overflow-x-hidden">
+          <div className="flex-1 bg-white w-full overflow-y-scroll overflow-x-hidden md:pb-16 pb-24">
+            <div className="w-full" ref={tableTopRef}></div>
             <TableCases
               showLimit={showLimit}
               activeData={activeData}
               startIndexResult={startIndexResult}
             />
+            {activeData.length >= 15 && (
+              <div className="w-full py-10 text-center">
+                <button
+                  className="text-center text-blue-700 bg-gray-100 p-3 rounded-lg"
+                  onClick={() => {
+                    tableTopRef.current.scrollIntoView();
+                  }}
+                >
+                  Back to top
+                </button>
+              </div>
+            )}
           </div>
-          <div className="bg-gray-900 w-full">
+          <div className="bg-gray-900 w-full fixed bottom-0 left-0">
             <TableControlsBottom
               showLimit={showLimit}
               setShowLimit={setShowLimit}

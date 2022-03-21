@@ -38,7 +38,7 @@ const TableCases = props => {
             .slice(startIndexResult, startIndexResult + showLimit)
             .map((d, index) => (
               <Tr
-                key={d.EPIID + d.DAdmit}
+                key={d.EPIID + Math.random()}
                 className={`border-2 border-gray-200 ${
                   index % 2 === 0 ? "bg-white" : "bg-gray-100"
                 }`}
