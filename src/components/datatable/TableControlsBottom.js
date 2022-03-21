@@ -1,9 +1,22 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 
 const TableControlsBottom = props => {
   const { listMuncities } = useContext(GlobalContext);
-  const { showLimit, setShowLimit, totalResults } = props;
+  const {
+    showLimit,
+    setShowLimit,
+    totalResults,
+    startIndexResult,
+    setStartIndexResult
+  } = props;
+  const [maxShow, setMaxShow] = useState(10);
+
+  useEffect(() => {
+    startIndexResult + showLimit > totalResults
+      ? setMaxShow(totalResults)
+      : setMaxShow(startIndexResult + showLimit);
+  }, [showLimit, totalResults, startIndexResult]);
 
   return (
     <>
@@ -24,7 +37,7 @@ const TableControlsBottom = props => {
             id="show"
             className="text-sm p-1 rounded outline-none cursor-pointer"
             value={showLimit}
-            onChange={e => setShowLimit(e.target.value)}
+            onChange={e => setShowLimit(parseInt(e.target.value))}
           >
             <option value="10">Show 10</option>
             <option value="25">Show 25</option>
@@ -35,11 +48,15 @@ const TableControlsBottom = props => {
 
         <div className="flex md:justify-end justify-between items-center w-full">
           <label className="text-sm text-white mr-3" htmlFor="show">
-            {`Showing 1-${showLimit} of ${totalResults} Results`}
+            {`Showing ${startIndexResult +
+              1} to ${maxShow} of ${totalResults} entries`}
           </label>
 
           <div className="flex justify-start items-center">
-            <button className="bg-gray-300 hover:bg-gray-100 p-1 rounded-l">
+            <button
+              className="bg-gray-300 hover:bg-gray-100 p-1 rounded-l"
+              onClick={() => setStartIndexResult(0)}
+            >
               <svg
                 className="h-6 w-6 text-gray-900"
                 viewBox="0 0 24 24"
@@ -73,7 +90,12 @@ const TableControlsBottom = props => {
               </svg>
             </button>
 
-            <button className="bg-white hover:bg-gray-100 p-1">
+            <button
+              className="bg-white hover:bg-gray-100 p-1"
+              onClick={() => {
+                setStartIndexResult(startIndexResult + showLimit);
+              }}
+            >
               <svg
                 className="h-6 w-6 text-gray-900"
                 width="24"
@@ -91,7 +113,10 @@ const TableControlsBottom = props => {
               </svg>
             </button>
 
-            <button className="bg-white hover:bg-gray-100 p-1 rounded-r">
+            <button
+              className="bg-white hover:bg-gray-100 p-1 rounded-r"
+              onClick={() => setStartIndexResult(totalResults - showLimit)}
+            >
               <svg
                 className="h-6 w-6 text-gray-900"
                 viewBox="0 0 24 24"

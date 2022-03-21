@@ -1,7 +1,17 @@
 import React from "react";
 
 const TableControlsTop = props => {
-  const { searchText, setSearchText, totalRecords } = props;
+  const {
+    searchText,
+    setSearchText,
+    totalRecords,
+    setStartIndexResult
+  } = props;
+  const handleSearchInput = e => {
+    setSearchText(e.target.value);
+    setStartIndexResult(0);
+  };
+
   return (
     <>
       <div className="flex md:flex-row flex-col md:justify-between justify-start items-center md:space-x-3 space-x-0 md:space-y-0 space-y-2 p-3">
@@ -15,8 +25,8 @@ const TableControlsTop = props => {
               id="search"
               type="text"
               value={searchText}
-              placeholder={`${totalRecords} Records...`}
-              onChange={e => setSearchText(e.target.value)}
+              placeholder={`${totalRecords} total records...`}
+              onChange={handleSearchInput}
             />
           </div>
           <div className="flex justify-start items-center md:w-auto w-full">

@@ -11,6 +11,7 @@ const DataTable = () => {
   const [showLimit, setShowLimit] = useState(10);
   const [activeData, setActiveData] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [startIndexResult, setStartIndexResult] = useState(0);
 
   useEffect(() => {
     if (searchText === "") {
@@ -33,16 +34,23 @@ const DataTable = () => {
               searchText={searchText}
               setSearchText={setSearchText}
               totalRecords={dengueData.length}
+              setStartIndexResult={setStartIndexResult}
             />
           </div>
           <div className="flex-1 bg-white w-full overflow-y-scroll overflow-x-hidden">
-            <TableCases showLimit={showLimit} activeData={activeData} />
+            <TableCases
+              showLimit={showLimit}
+              activeData={activeData}
+              startIndexResult={startIndexResult}
+            />
           </div>
           <div className="bg-gray-900 w-full">
             <TableControlsBottom
               showLimit={showLimit}
               setShowLimit={setShowLimit}
               totalResults={activeData.length}
+              startIndexResult={startIndexResult}
+              setStartIndexResult={setStartIndexResult}
             />
           </div>
         </div>

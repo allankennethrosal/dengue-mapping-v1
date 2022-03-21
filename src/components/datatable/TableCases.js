@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import ModalDetails from "./ModalDetails";
+import { formatDate } from "../../utils/GlobalUtils";
 
 const TableCases = props => {
-  const { activeData, showLimit } = props;
+  const { activeData, showLimit, startIndexResult } = props;
   const [openModalDetails, setOpenModalDetails] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
   const handleModalDetailsOpen = d => {
+    console.log(d);
     setSelectedData(d);
     setOpenModalDetails(true);
   };
@@ -32,51 +34,57 @@ const TableCases = props => {
           </Tr>
         </Thead>
         <Tbody>
-          {activeData.slice(0, showLimit).map((d, index) => (
-            <Tr
-              key={d.EPIID + d.DAdmit}
-              className={`border-2 border-gray-200 ${
-                index % 2 === 0 ? "bg-white" : "bg-gray-100"
-              }`}
-            >
-              <Td className="text-sm text-center p-1">{d.DAdmit}</Td>
-              <Td className="text-sm text-center p-1">{d.Muncity}</Td>
-              <Td className="text-sm text-center p-1">{d.Barangay}</Td>
-              <Td className="text-sm text-center p-1">{d.NameOfDru}</Td>
-              <Td className="text-sm text-center p-1">
-                {d.AgeYears < 1 ? "< 1" : d.AgeYears}
-              </Td>
-              <Td className="text-sm text-center p-1">{d.DateOfEntry}</Td>
-              <Td className="text-sm text-center p-1">
-                <button
-                  className="flex justify-center items-center text-white bg-blue-500 hover:bg-blue-700 p-1 rounded"
-                  onClick={() => handleModalDetailsOpen(d)}
-                >
-                  <svg
-                    className="h-6 w-6 text-white"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+          {activeData
+            .slice(startIndexResult, startIndexResult + showLimit)
+            .map((d, index) => (
+              <Tr
+                key={d.EPIID + d.DAdmit}
+                className={`border-2 border-gray-200 ${
+                  index % 2 === 0 ? "bg-white" : "bg-gray-100"
+                }`}
+              >
+                <Td className="text-sm text-center p-1">
+                  {formatDate(d.DAdmit)}
+                </Td>
+                <Td className="text-sm text-center p-1">{d.Muncity}</Td>
+                <Td className="text-sm text-center p-1">{d.Barangay}</Td>
+                <Td className="text-sm text-center p-1">{d.NameOfDru}</Td>
+                <Td className="text-sm text-center p-1">
+                  {d.AgeYears < 1 ? "< 1" : d.AgeYears}
+                </Td>
+                <Td className="text-sm text-center p-1">
+                  {formatDate(d.DateOfEntry)}
+                </Td>
+                <Td className="text-sm text-center p-1">
+                  <button
+                    className="flex justify-center items-center text-white bg-blue-500 hover:bg-blue-700 p-1 rounded"
+                    onClick={() => handleModalDetailsOpen(d)}
                   >
-                    {" "}
-                    <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                    <path
-                      d="M18 15l-6-6l-6 6h12"
-                      transform="rotate(180 12 12)"
-                    />
-                  </svg>
-                  <label className="sm:hidden block mx-1 cursor-pointer">
-                    More
-                  </label>
-                </button>
-              </Td>
-            </Tr>
-          ))}
+                    <svg
+                      className="h-6 w-6 text-white"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      {" "}
+                      <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                      <path
+                        d="M18 15l-6-6l-6 6h12"
+                        transform="rotate(180 12 12)"
+                      />
+                    </svg>
+                    <label className="sm:hidden block mx-1 cursor-pointer">
+                      More
+                    </label>
+                  </button>
+                </Td>
+              </Tr>
+            ))}
         </Tbody>
       </Table>
 
