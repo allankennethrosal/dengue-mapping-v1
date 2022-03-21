@@ -1,11 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
-import { GlobalContext } from "../../context/GlobalContext";
 import ModalDetails from "./ModalDetails";
 
-const TableCases = () => {
-  const { dengueData } = useContext(GlobalContext);
+const TableCases = props => {
+  const { activeData, showLimit } = props;
   const [openModalDetails, setOpenModalDetails] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
   const handleModalDetailsOpen = d => {
@@ -33,7 +32,7 @@ const TableCases = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {dengueData.slice(0, 15).map((d, index) => (
+          {activeData.slice(0, showLimit).map((d, index) => (
             <Tr
               key={d.EPIID + d.DAdmit}
               className={`border-2 border-gray-200 ${

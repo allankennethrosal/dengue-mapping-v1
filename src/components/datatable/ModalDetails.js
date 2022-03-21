@@ -25,15 +25,14 @@ const ModalDetails = props => {
       >
         <div className="flex flex-col justify-start items-start bg-white w-full space-y-5">
           <div className="flex justify-between items-center space-x-3 w-full">
-            <h4 className="md:text-md text-sm font-bold bg-gray-100 p-3 rounded-md drop-shadow-md">
+            <h4 className="flex-1 md:text-md text-sm font-bold bg-gray-100 p-3 rounded-md drop-shadow-md">
               <span className="text-gray-900">EPID: </span>
-              <span className="text-green-700 truncate">
+              <span className="text-green-700 truncate overflow-hidden text-ellipsis">
                 {selectedData.EPIID}
                 {/* A3D000804D914BE199E60AB14B4A027E */}
               </span>
             </h4>
             <button
-              className="drop-shadow-lg"
               onClick={() => {
                 handleClose();
                 setActivePage(0);

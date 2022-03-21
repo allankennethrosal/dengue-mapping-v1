@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 
-const TableControlsBottom = () => {
+const TableControlsBottom = props => {
   const { listMuncities } = useContext(GlobalContext);
+  const { showLimit, setShowLimit, totalResults } = props;
 
   return (
     <>
-      <div className="flex sm:flex-row flex-col justify-between items-center space-y-3 sm:space-y-0 p-3">
-        <div className="flex sm:justify-start justify-between items-center space-x-1 w-full">
+      <div className="flex md:flex-row flex-col justify-between items-center space-y-3 md:space-y-0 p-3">
+        <div className="flex md:justify-start justify-between items-center space-x-1 w-full">
           <select
             id="show"
             className="text-sm p-1 rounded outline-none cursor-pointer"
           >
-            <option value="DAdmit">ALL MUNCITIES</option>
+            <option value="ALL">ALL MUNCITIES</option>
             {listMuncities.map(m => (
               <option key={m} value={m}>
                 {m}
@@ -22,16 +23,19 @@ const TableControlsBottom = () => {
           <select
             id="show"
             className="text-sm p-1 rounded outline-none cursor-pointer"
+            value={showLimit}
+            onChange={e => setShowLimit(e.target.value)}
           >
-            <option value="DAdmit">Show 10</option>
-            <option value="DEntry">Show 25</option>
-            <option value="Muncity">Show 50</option>
+            <option value="10">Show 10</option>
+            <option value="25">Show 25</option>
+            <option value="50">Show 50</option>
+            <option value="100">Show 100</option>
           </select>
         </div>
 
-        <div className="flex sm:justify-end justify-between items-center w-full">
+        <div className="flex md:justify-end justify-between items-center w-full">
           <label className="text-sm text-white mr-3" htmlFor="show">
-            Page 1 of 58
+            {`Showing 1-${showLimit} of ${totalResults} Results`}
           </label>
 
           <div className="flex justify-start items-center">
