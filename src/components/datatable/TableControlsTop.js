@@ -9,7 +9,9 @@ const TableControlsTop = props => {
     sortBy,
     setSortBy,
     sortOrder,
-    setSortOrder
+    setSortOrder,
+    yearFilter,
+    setYearFilter
   } = props;
   const handleSearchInput = e => {
     setSearchText(e.target.value);
@@ -69,9 +71,19 @@ const TableControlsTop = props => {
             <select
               id="year"
               className="text-sm ml-3 mr-1 md:w-auto w-full md:p-2 p-1 border-2 border-gray-100 rounded-md outline-none focus:border-gray-300 cursor-pointer"
+              value={yearFilter}
+              onChange={e => setYearFilter(e.target.value)}
             >
-              <option value="DEntry">All</option>
-              <option value="DAdmit">2022</option>
+              <option value="ALL">All</option>
+              <option value="2022">2022</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+              <option value="2018">2018</option>
+              <option value="2017">2017</option>
+              <option value="2016">2016</option>
+              <option value="2015">2015</option>
+              <option value="2014">2014</option>
             </select>
           </div>
           <button className="flex justify-center items-center text-white font-bold bg-green-700 hover:bg-green-900 md:w-auto w-full md:py-2 py-1 px-3 rounded">

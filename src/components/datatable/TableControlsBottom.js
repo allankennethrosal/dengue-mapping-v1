@@ -8,7 +8,9 @@ const TableControlsBottom = props => {
     setShowLimit,
     totalResults,
     startIndexResult,
-    setStartIndexResult
+    setStartIndexResult,
+    muncityFilter,
+    setMuncityFilter
   } = props;
   const [maxShow, setMaxShow] = useState(10);
   const handleNextPage = () => {
@@ -39,6 +41,8 @@ const TableControlsBottom = props => {
           <select
             id="show"
             className="text-sm p-1 rounded outline-none cursor-pointer"
+            value={muncityFilter}
+            onChange={e => setMuncityFilter(e.target.value)}
           >
             <option value="ALL">ALL MUNCITIES</option>
             {listMuncities.map(m => (
@@ -62,8 +66,9 @@ const TableControlsBottom = props => {
 
         <div className="flex md:justify-end justify-between items-center w-full">
           <label className="text-sm text-white mr-3" htmlFor="show">
-            {`Showing ${startIndexResult +
-              1} to ${maxShow} of ${totalResults} entries`}
+            {`Showing ${
+              totalResults > 0 ? startIndexResult + 1 : 0
+            } to ${maxShow} of ${totalResults} entries`}
           </label>
 
           <div className="flex justify-start items-center">
