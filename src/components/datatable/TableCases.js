@@ -9,7 +9,6 @@ const TableCases = props => {
   const [openModalDetails, setOpenModalDetails] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
   const handleModalDetailsOpen = d => {
-    console.log(d);
     setSelectedData(d);
     setOpenModalDetails(true);
   };
@@ -50,7 +49,9 @@ const TableCases = props => {
                 <Td className="text-sm text-center p-1">{d.Barangay}</Td>
                 <Td className="text-sm text-center p-1">{d.NameOfDru}</Td>
                 <Td className="text-sm text-center p-1">
-                  {d.AgeYears < 1 ? "< 1" : d.AgeYears}
+                  {d.AgeYears.includes(".") && parseFloat(d.AgeYears) > 0
+                    ? parseFloat(d.AgeYears).toFixed(2)
+                    : d.AgeYears}
                 </Td>
                 <Td className="text-sm text-center p-1">
                   {formatDate(d.DateOfEntry)}

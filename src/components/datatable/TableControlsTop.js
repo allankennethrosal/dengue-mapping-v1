@@ -5,7 +5,11 @@ const TableControlsTop = props => {
     searchText,
     setSearchText,
     totalRecords,
-    setStartIndexResult
+    setStartIndexResult,
+    sortBy,
+    setSortBy,
+    sortOrder,
+    setSortOrder
   } = props;
   const handleSearchInput = e => {
     setSearchText(e.target.value);
@@ -36,9 +40,11 @@ const TableControlsTop = props => {
             <select
               id="sort"
               className="text-sm ml-3 mr-1 md:w-auto w-full md:p-2 p-1 border-2 border-gray-100 rounded-md outline-none focus:border-gray-300 cursor-pointer"
+              value={sortBy}
+              onChange={e => setSortBy(e.target.value)}
             >
               <option value="DAdmit">Date Admitted</option>
-              <option value="DEntry">Date of Entry</option>
+              <option value="DateOfEntry">Date of Entry</option>
               <option value="Muncity">Muncity</option>
               <option value="AgeYears">Age</option>
             </select>
@@ -46,9 +52,11 @@ const TableControlsTop = props => {
             <select
               id="asc-desc"
               className="text-sm md:w-auto w-full md:p-2 p-1 border-2 border-gray-100 rounded-md outline-none focus:border-gray-300 cursor-pointer"
+              value={sortOrder}
+              onChange={e => setSortOrder(e.target.value)}
             >
-              <option value="DAdmit">Ascending</option>
-              <option value="DEntry">Descending</option>
+              <option value="ASC">Ascending</option>
+              <option value="DESC">Descending</option>
             </select>
           </div>
         </div>
@@ -62,8 +70,8 @@ const TableControlsTop = props => {
               id="year"
               className="text-sm ml-3 mr-1 md:w-auto w-full md:p-2 p-1 border-2 border-gray-100 rounded-md outline-none focus:border-gray-300 cursor-pointer"
             >
-              <option value="DAdmit">2022</option>
               <option value="DEntry">All</option>
+              <option value="DAdmit">2022</option>
             </select>
           </div>
           <button className="flex justify-center items-center text-white font-bold bg-green-700 hover:bg-green-900 md:w-auto w-full md:py-2 py-1 px-3 rounded">
