@@ -40,7 +40,7 @@ const TableControlsBottom = props => {
         <div className="flex md:justify-start justify-between items-center space-x-1 w-full">
           <select
             id="show"
-            className="text-sm p-1 rounded outline-none cursor-pointer"
+            className="text-sm p-1 border-2 border-gray-100 focus:border-gray-300 rounded outline-none cursor-pointer"
             value={muncityFilter}
             onChange={e => setMuncityFilter(e.target.value)}
           >
@@ -53,7 +53,7 @@ const TableControlsBottom = props => {
           </select>
           <select
             id="show"
-            className="text-sm p-1 rounded outline-none cursor-pointer"
+            className="text-sm p-1 border-2 border-gray-100 focus:border-gray-300 rounded outline-none cursor-pointer"
             value={showLimit}
             onChange={e => setShowLimit(parseInt(e.target.value))}
           >
@@ -65,7 +65,7 @@ const TableControlsBottom = props => {
         </div>
 
         <div className="flex md:justify-end justify-between items-center w-full">
-          <label className="text-sm text-white mr-3" htmlFor="show">
+          <label className="text-sm text-gray-900 mr-3" htmlFor="show">
             {`Showing ${
               totalResults > 0 ? startIndexResult + 1 : 0
             } to ${maxShow} of ${totalResults} entries`}

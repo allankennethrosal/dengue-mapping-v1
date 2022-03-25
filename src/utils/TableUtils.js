@@ -14,7 +14,7 @@ export const searchData = (data, searchText) => {
   });
 };
 
-const compareDates = (date1, date2) => {
+export const compareDates = (date1, date2) => {
   var d1 = Date.parse(date1);
   var d2 = Date.parse(date2);
 
@@ -27,8 +27,8 @@ export const sortData = async (dengueData, sortOrder, sortBy) => {
 
   return await dengueData.sort((a, b) => {
     if (sortBy === "AgeYears") {
-      const ageA = parseFloat(a.AgeYears);
-      const ageB = parseFloat(b.AgeYears);
+      const ageA = parseFloat(a.AgeDays);
+      const ageB = parseFloat(b.AgeDays);
       return ageA > ageB ? order1 : ageB > ageA ? order2 : 0;
     } else if (sortBy === "DateOfEntry") {
       return compareDates(a.DateOfEntry, b.DateOfEntry)
