@@ -11,7 +11,7 @@ const InfoSection = () => {
     <>
       <div className="flex flex-col w-full space-y-3">
         <InfoYearControl />
-        <div className="flex justify-start items-center bg-gray-100 p-3 rounded-lg drop-shadow-md">
+        <div className="flex justify-start items-center bg-gray-100 p-3 rounded-lg drop-shadow">
           <svg
             className="h-8 w-8 text-gray-900"
             width="24"

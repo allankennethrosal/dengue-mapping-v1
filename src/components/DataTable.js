@@ -66,7 +66,7 @@ const DataTable = () => {
           <div className="w-full p-3">
             <div
               id="table-top"
-              className="bg-white w-full border-b-2 border-gray-100 rounded-lg"
+              className="bg-white w-full border-b-2 border-gray-100 rounded-lg drop-shadow-sm"
             >
               <TableControlsTop
                 searchText={searchText}
@@ -87,7 +87,7 @@ const DataTable = () => {
           <div className="w-full px-3 overflow-y-scroll overflow-x-hidden lg:pb-18 pb-28">
             {activeData.length > 0 ? (
               !tableLoading ? (
-                <div className="flex-1 bg-white w-full overflow-x-hidden rounded-lg">
+                <div className="flex-1 bg-white w-full overflow-x-hidden rounded-lg drop-shadow-sm">
                   <div className="w-full" ref={tableTopRef}></div>
                   <TableCases
                     showLimit={showLimit}
@@ -108,19 +108,19 @@ const DataTable = () => {
                   )}
                 </div>
               ) : (
-                <div className="py-10 mt-10 text-center bg-white sm:w-2/3 w-full rounded-lg">
+                <div className="py-10 mt-10 text-center bg-white sm:w-2/3 w-full sm:container sm:mx-auto rounded-lg drop-shadow-sm">
                   Loading...
                 </div>
               )
             ) : (
-              <div className="py-10 mt-10 text-center bg-white sm:w-2/3 w-full rounded-lg">
+              <div className="py-10 mt-10 text-center bg-white sm:w-2/3 w-full sm:container sm:mx-auto rounded-lg drop-shadow-sm">
                 No records found.
               </div>
             )}
           </div>
 
           <div className="bg-gray-100 w-full p-3 fixed bottom-0 left-0">
-            <div className="bg-white w-full rounded-lg">
+            <div className="bg-white w-full rounded-lg drop-shadow-sm">
               <TableControlsBottom
                 showLimit={showLimit}
                 setShowLimit={setShowLimit}

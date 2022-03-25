@@ -74,7 +74,7 @@ const InfoSectionChartAgeGroup = () => {
 
   return (
     <>
-      <div className="bg-gray-100 w-full p-3 drop-shadow-md">
+      <div className="bg-gray-100 w-full p-3 drop-shadow">
         <h6 className="text-gray-900 font-bold text-sm px-2 mb-2">
           Dengue Cases of Age Groups
         </h6>
