@@ -10,7 +10,9 @@ const TableControlsBottom = props => {
     startIndexResult,
     setStartIndexResult,
     muncityFilter,
-    setMuncityFilter
+    setMuncityFilter,
+    yearFilter,
+    setYearFilter
   } = props;
   const [maxShow, setMaxShow] = useState(10);
   const handleNextPage = () => {
@@ -36,11 +38,11 @@ const TableControlsBottom = props => {
 
   return (
     <>
-      <div className="flex md:flex-row flex-col justify-between items-center space-y-3 md:space-y-0 p-3">
-        <div className="flex md:justify-start justify-between items-center space-x-1 w-full">
+      <div className="flex lg:flex-row flex-col justify-between items-center space-y-3 lg:space-y-0 p-3">
+        <div className="flex sm:flex-row flex-col lg:justify-start justify-between items-center sm:space-x-1 space-x-0 sm:space-y-0 space-y-1 w-full">
           <select
             id="show"
-            className="text-sm p-1 border-2 border-gray-100 focus:border-gray-300 rounded outline-none cursor-pointer"
+            className="text-sm w-full p-1 border-2 border-gray-100 focus:border-gray-300 rounded outline-none cursor-pointer"
             value={muncityFilter}
             onChange={e => setMuncityFilter(e.target.value)}
           >
@@ -51,20 +53,39 @@ const TableControlsBottom = props => {
               </option>
             ))}
           </select>
-          <select
-            id="show"
-            className="text-sm p-1 border-2 border-gray-100 focus:border-gray-300 rounded outline-none cursor-pointer"
-            value={showLimit}
-            onChange={e => setShowLimit(parseInt(e.target.value))}
-          >
-            <option value="10">Show 10</option>
-            <option value="25">Show 25</option>
-            <option value="50">Show 50</option>
-            <option value="100">Show 100</option>
-          </select>
+          <div className="flex w-full justify-start items-center space-x-1">
+            <select
+              id="year"
+              className="text-sm w-full md:w-auto p-1 border-2 border-gray-100 rounded outline-none focus:border-gray-300 cursor-pointer"
+              value={yearFilter}
+              onChange={e => setYearFilter(e.target.value)}
+            >
+              <option value="ALL">All Time</option>
+              <option value="2022">2022</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+              <option value="2018">2018</option>
+              <option value="2017">2017</option>
+              <option value="2016">2016</option>
+              <option value="2015">2015</option>
+              <option value="2014">2014</option>
+            </select>
+            <select
+              id="show"
+              className="text-sm w-full p-1 border-2 border-gray-100 focus:border-gray-300 rounded outline-none cursor-pointer"
+              value={showLimit}
+              onChange={e => setShowLimit(parseInt(e.target.value))}
+            >
+              <option value="10">Show 10</option>
+              <option value="25">Show 25</option>
+              <option value="50">Show 50</option>
+              <option value="100">Show 100</option>
+            </select>
+          </div>
         </div>
 
-        <div className="flex md:justify-end justify-between items-center w-full">
+        <div className="flex lg:justify-end justify-between items-center w-full">
           <label className="text-sm text-gray-900 mr-3" htmlFor="show">
             {`Showing ${
               totalResults > 0 ? startIndexResult + 1 : 0

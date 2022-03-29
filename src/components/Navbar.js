@@ -57,7 +57,7 @@ export const NavbarMobile = () => {
   return (
     <>
       <div
-        className="flex justify-between items-center bg-gray-900 md:px-5 px-3 py-4 w-full z-20"
+        className="flex justify-between items-center bg-gray-900 md:px-5 px-3 py-4 w-full z-40"
         style={{ height: 64 }}
       >
         <img src={NavbarLogo} className="w-36" alt="Navbar Logo" />
@@ -98,7 +98,7 @@ export const NavbarMobile = () => {
       </div>
 
       <nav
-        className="flex flex-col space-y-2 justify-end fixed top-0 left-0 bg-gray-900 text-gray-100 border-t-2 border-gray-700 w-full h-auto p-3 z-50 transition-all ease-in-out duration-300 rounded-b-lg z-10"
+        className="flex flex-col space-y-2 justify-end fixed top-0 left-0 bg-gray-900 text-gray-100 border-t-2 border-gray-700 w-full h-auto p-3 z-30 transition-all ease-in-out duration-300 rounded-b-lg z-10"
         style={{
           transform: ifNavOpen ? "translateY(64px)" : "translateY(-100%)"
         }}

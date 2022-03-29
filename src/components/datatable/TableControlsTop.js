@@ -9,9 +9,7 @@ const TableControlsTop = props => {
     sortBy,
     setSortBy,
     sortOrder,
-    setSortOrder,
-    yearFilter,
-    setYearFilter
+    setSortOrder
   } = props;
   const handleSearchInput = e => {
     setSearchText(e.target.value);
@@ -63,30 +61,33 @@ const TableControlsTop = props => {
           </div>
         </div>
 
-        <div className="flex justify-end items-center w-full">
-          <div className="flex justify-start items-center md:w-auto w-full">
-            <label className="text-sm" htmlFor="year">
-              Year:
-            </label>
-            <select
-              id="year"
-              className="text-sm ml-3 mr-1 md:w-auto w-full md:p-2 p-1 border-2 border-gray-100 rounded-md outline-none focus:border-gray-300 cursor-pointer"
-              value={yearFilter}
-              onChange={e => setYearFilter(e.target.value)}
+        <div className="flex justify-end items-center w-full space-x-1">
+          <button className="flex justify-center items-center text-white bg-green-600 hover:bg-green-700 md:w-auto w-full py-2 px-3 rounded">
+            <svg
+              className="h-6 w-6 text-white"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <option value="ALL">All</option>
-              <option value="2022">2022</option>
-              <option value="2021">2021</option>
-              <option value="2020">2020</option>
-              <option value="2019">2019</option>
-              <option value="2018">2018</option>
-              <option value="2017">2017</option>
-              <option value="2016">2016</option>
-              <option value="2015">2015</option>
-              <option value="2014">2014</option>
-            </select>
-          </div>
-          <button className="flex justify-center items-center text-white font-bold bg-green-700 hover:bg-green-900 md:w-auto w-full md:py-2 py-1 px-3 rounded">
+              {" "}
+              <path stroke="none" d="M0 0h24v24H0z" />{" "}
+              <path d="M14 3v4a1 1 0 0 0 1 1h4" />{" "}
+              <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />{" "}
+              <line x1="9" y1="9" x2="10" y2="9" />{" "}
+              <line x1="9" y1="13" x2="15" y2="13" />{" "}
+              <line x1="9" y1="17" x2="15" y2="17" />
+            </svg>
+
+            <span className="ml-2 lg:block md:hidden sm:block hidden">
+              Upload CSV
+            </span>
+          </button>
+          <button className="flex justify-center items-center text-white bg-green-900 hover:bg-green-700 md:w-auto w-full py-2 px-3 rounded">
             <svg
               className="h-6 w-6 text-white"
               fill="none"
@@ -101,7 +102,9 @@ const TableControlsTop = props => {
               />
             </svg>
 
-            <span className="ml-2 lg:block md:hidden block">Add a Record</span>
+            <span className="ml-2 lg:block md:hidden sm:block hidden">
+              Add a Record
+            </span>
           </button>
         </div>
       </div>

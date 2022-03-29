@@ -1,26 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
-import ModalDetails from "./ModalDetails";
 import { formatDate } from "../../utils/GlobalUtils";
 
 const TableCases = props => {
-  const { activeData, showLimit, startIndexResult } = props;
-  const [openModalDetails, setOpenModalDetails] = useState(false);
-  const [selectedData, setSelectedData] = useState(null);
-  const handleModalDetailsOpen = d => {
-    setSelectedData(d);
-    setOpenModalDetails(true);
-  };
-  const handleModalDetailsClose = () => {
-    setOpenModalDetails(false);
-  };
+  const {
+    activeData,
+    showLimit,
+    startIndexResult,
+    handleModalDetailsOpen
+  } = props;
 
   return (
     <>
       <Table>
         <Thead>
-          <Tr className="bg-gray-800 text-white">
+          <Tr className="bg-gray-900 text-white">
             <Th className="text-sm p-2">DAdmit</Th>
             <Th className="text-sm p-2">Muncity</Th>
             <Th className="text-sm p-2">Barangay</Th>
@@ -88,14 +83,6 @@ const TableCases = props => {
             ))}
         </Tbody>
       </Table>
-
-      {selectedData && (
-        <ModalDetails
-          open={openModalDetails}
-          handleClose={handleModalDetailsClose}
-          selectedData={selectedData}
-        />
-      )}
     </>
   );
 };

@@ -5,6 +5,7 @@ import TableControlsTop from "./datatable/TableControlsTop";
 import TableControlsBottom from "./datatable/TableControlsBottom";
 import { GlobalContext } from "../context/GlobalContext";
 import { searchData, sortData, filterData } from "../utils/TableUtils";
+import ModalDetails from "./datatable/ModalDetails";
 
 const DataTable = () => {
   const { dengueData } = useContext(GlobalContext);
@@ -18,6 +19,16 @@ const DataTable = () => {
   const [muncityFilter, setMuncityFilter] = useState("ALL");
   const [tableLoading, setTableLoading] = useState(true);
   const tableTopRef = useRef();
+
+  const [openModalDetails, setOpenModalDetails] = useState(false);
+  const [selectedData, setSelectedData] = useState(null);
+  const handleModalDetailsOpen = d => {
+    setSelectedData(d);
+    setOpenModalDetails(true);
+  };
+  const handleModalDetailsClose = () => {
+    setOpenModalDetails(false);
+  };
 
   useEffect(() => {
     (async () => {
@@ -78,13 +89,11 @@ const DataTable = () => {
                 sortOrder={sortOrder}
                 setSortOrder={setSortOrder}
                 setTableLoading={setTableLoading}
-                yearFilter={yearFilter}
-                setYearFilter={setYearFilter}
               />
             </div>
           </div>
 
-          <div className="w-full px-3 overflow-y-scroll overflow-x-hidden lg:pb-18 pb-28">
+          <div className="w-full px-3 overflow-x-hidden lg:pb-18 pb-28">
             {activeData.length > 0 ? (
               !tableLoading ? (
                 <div className="flex-1 bg-white w-full overflow-x-hidden rounded-lg drop-shadow-sm">
@@ -93,6 +102,7 @@ const DataTable = () => {
                     showLimit={showLimit}
                     activeData={activeData}
                     startIndexResult={startIndexResult}
+                    handleModalDetailsOpen={handleModalDetailsOpen}
                   />
                   {activeData.length >= 15 && (
                     <div className="w-full text-center pt-5 pb-8">
@@ -119,7 +129,7 @@ const DataTable = () => {
             )}
           </div>
 
-          <div className="bg-gray-100 w-full p-3 fixed bottom-0 left-0">
+          <div className="bg-gray-100 w-full p-3 fixed bottom-0 left-0 border-t-2 border-gray-200">
             <div className="bg-white w-full rounded-lg drop-shadow-sm">
               <TableControlsBottom
                 showLimit={showLimit}
@@ -129,10 +139,20 @@ const DataTable = () => {
                 setStartIndexResult={setStartIndexResult}
                 muncityFilter={muncityFilter}
                 setMuncityFilter={setMuncityFilter}
+                yearFilter={yearFilter}
+                setYearFilter={setYearFilter}
               />
             </div>
           </div>
         </div>
+
+        {selectedData && (
+          <ModalDetails
+            open={openModalDetails}
+            handleClose={handleModalDetailsClose}
+            selectedData={selectedData}
+          />
+        )}
       </div>
     </>
   );

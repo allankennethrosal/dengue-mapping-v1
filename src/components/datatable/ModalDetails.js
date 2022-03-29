@@ -16,7 +16,7 @@ const ModalDetails = props => {
   return (
     <>
       <div
-        className="absolute left-0 bg-white w-screen z-30 p-5 overflow-y-scroll"
+        className="fixed left-0 top-0 bg-white w-screen z-20 p-5 overflow-y-scroll"
         style={{
           height: "calc(100% - 64px)",
           top: 64,
