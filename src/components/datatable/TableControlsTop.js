@@ -9,7 +9,8 @@ const TableControlsTop = props => {
     sortBy,
     setSortBy,
     sortOrder,
-    setSortOrder
+    setSortOrder,
+    handleUploadClick
   } = props;
   const handleSearchInput = e => {
     setSearchText(e.target.value);
@@ -62,9 +63,31 @@ const TableControlsTop = props => {
         </div>
 
         <div className="flex justify-end items-center w-full space-x-1">
-          <button className="flex justify-center items-center text-white bg-green-600 hover:bg-green-700 md:w-auto w-full py-2 px-3 rounded">
+          <button className="flex justify-center items-center text-green-600 hover:text-white bg-white hover:bg-green-600 border-2 border-green-600 md:w-auto w-full py-2 px-3 rounded">
             <svg
-              className="h-6 w-6 text-white"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 4v16m8-8H4"
+              />
+            </svg>
+
+            <span className="ml-2 lg:block md:hidden sm:block hidden">
+              Add a Record
+            </span>
+          </button>
+          <button
+            className="flex justify-center items-center text-white bg-green-600 hover:bg-green-700 border-2 border-green-600 hover:border-green-700 md:w-auto w-full py-2 px-3 rounded"
+            onClick={handleUploadClick}
+          >
+            <svg
+              className="h-6 w-6"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -85,25 +108,6 @@ const TableControlsTop = props => {
 
             <span className="ml-2 lg:block md:hidden sm:block hidden">
               Upload CSV
-            </span>
-          </button>
-          <button className="flex justify-center items-center text-white bg-green-900 hover:bg-green-700 md:w-auto w-full py-2 px-3 rounded">
-            <svg
-              className="h-6 w-6 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 4v16m8-8H4"
-              />
-            </svg>
-
-            <span className="ml-2 lg:block md:hidden sm:block hidden">
-              Add a Record
             </span>
           </button>
         </div>

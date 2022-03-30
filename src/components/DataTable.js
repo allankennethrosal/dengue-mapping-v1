@@ -6,6 +6,7 @@ import TableControlsBottom from "./datatable/TableControlsBottom";
 import { GlobalContext } from "../context/GlobalContext";
 import { searchData, sortData, filterData } from "../utils/TableUtils";
 import ModalDetails from "./datatable/ModalDetails";
+import ModalUploadCSV from "./datatable/add-components/ModalUploadCSV";
 
 const DataTable = () => {
   const { dengueData } = useContext(GlobalContext);
@@ -28,6 +29,14 @@ const DataTable = () => {
   };
   const handleModalDetailsClose = () => {
     setOpenModalDetails(false);
+  };
+
+  const [uploadModalOpen, setUploadModalOpen] = useState(false);
+  const handleUploadClick = () => {
+    setUploadModalOpen(true);
+  };
+  const handleUploadClose = () => {
+    setUploadModalOpen(false);
   };
 
   useEffect(() => {
@@ -70,6 +79,10 @@ const DataTable = () => {
     <>
       <div className="flex flex-col bg-gray-100 max-h-screen h-screen">
         <Navbar />
+        <ModalUploadCSV
+          uploadModalOpen={uploadModalOpen}
+          handleUploadClose={handleUploadClose}
+        />
         <div
           className="flex flex-col justify-center items-center overflow-hidden"
           style={{ height: "calc(100vh-64px)" }}
@@ -89,6 +102,7 @@ const DataTable = () => {
                 sortOrder={sortOrder}
                 setSortOrder={setSortOrder}
                 setTableLoading={setTableLoading}
+                handleUploadClick={handleUploadClick}
               />
             </div>
           </div>
