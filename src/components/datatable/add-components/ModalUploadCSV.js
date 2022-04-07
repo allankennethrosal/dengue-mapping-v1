@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import UploadArea from "./UploadArea";
+import FileActions from "./FileActions";
 
 const ModalUploadCSV = props => {
   const { uploadModalOpen, handleUploadClose } = props;
@@ -55,9 +56,9 @@ const ModalUploadCSV = props => {
             </button>
           </div>
         </div>
-        {csvResults && (
+        <hr />
+        {csvResults ? (
           <>
-            <hr />
             <div className="flex justify-start items-center w-full">
               <label className="border-l-2 border-gray-100 px-3">
                 {csvResults.data.length - 2} total records
@@ -66,22 +67,40 @@ const ModalUploadCSV = props => {
                 {csvResults.errors.length} parsing errors
               </label>
             </div>
+
+            <div className="w-full overflow-x-scroll">
+              <table>
+                <thead>
+                  <tr className="border-b-2 border-gray-100 text-xs">
+                    {csvResults.data[0].map(d => (
+                      <th key={d} className="p-1">
+                        {d}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {csvResults.data
+                    .splice(1, csvResults.data.length - 1)
+                    .map(d => (
+                      <tr
+                        key={Math.random()}
+                        className="border-b-2 border-gray-100 text-xs"
+                      >
+                        {d.map(attr => (
+                          <td key={Math.random()} className="p-1">
+                            {attr}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
           </>
+        ) : (
+          <FileActions />
         )}
-        <div className="w-full">
-          {csvResults &&
-            csvResults.data
-              .splice(1, csvResults.data.length - 2)
-              .map(d => (
-                <input
-                  key={Math.random()}
-                  type="text"
-                  className="w-full p-2 border-2 border-gray-100"
-                  value={JSON.stringify(d)}
-                  disabled
-                />
-              ))}
-        </div>
       </div>
     </>
   );

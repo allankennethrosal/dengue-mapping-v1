@@ -121,7 +121,11 @@ const ModalDetailsPatientInfo = props => {
               <input
                 className="p-3 rounded-lg w-full font-bold"
                 disabled
-                value={selectedData.Province}
+                value={
+                  selectedData.Province
+                    ? selectedData.Province
+                    : "MISAMIS OCCIDENTAL"
+                }
               ></input>
             </div>
             <div className="flex flex-col space-y-3">
@@ -129,7 +133,7 @@ const ModalDetailsPatientInfo = props => {
               <input
                 className="p-3 rounded-lg w-full font-bold"
                 disabled
-                value={selectedData.Region}
+                value={selectedData.Region ? selectedData.Region : "10"}
               ></input>
             </div>
           </div>

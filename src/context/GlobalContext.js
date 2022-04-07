@@ -1,10 +1,16 @@
-import React, { createContext } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import dengueData from "../data/dengue-cases-misocc.json";
+import { getCasesDB, createCaseDB } from "../utils/GlobalUtils";
 
 export const GlobalContext = createContext();
 
 export const GlobalProvider = props => {
   const listMuncities = {};
+  const [dbData, setDbData] = useState(null);
+
+  useEffect(() => {
+    getCasesDB(setDbData);
+  }, []);
 
   for (const d of dengueData.data) {
     if (!listMuncities[d.Muncity]) {
@@ -13,13 +19,15 @@ export const GlobalProvider = props => {
   }
 
   return (
-    <GlobalContext.Provider
-      value={{
-        dengueData: dengueData.data,
-        listMuncities: Object.keys(listMuncities).sort()
-      }}
-    >
-      {props.children}
-    </GlobalContext.Provider>
+    dbData && (
+      <GlobalContext.Provider
+        value={{
+          dengueData: dengueData.data.concat(dbData.data),
+          listMuncities: Object.keys(listMuncities).sort()
+        }}
+      >
+        {props.children}
+      </GlobalContext.Provider>
+    )
   );
 };
