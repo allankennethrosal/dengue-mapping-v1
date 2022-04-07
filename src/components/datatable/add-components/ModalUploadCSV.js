@@ -1,10 +1,52 @@
 import React, { useState } from "react";
 import UploadArea from "./UploadArea";
 import FileActions from "./FileActions";
+import { createCaseDB } from "../../../utils/GlobalUtils";
+
+const saveRecords = (csvData, dataAttr, setCreateError) => {
+  csvData.forEach(d => {
+    if (d.length === dataAttr.length) {
+      const item = {};
+      for (let i = 2; i < dataAttr.length; i++) {
+        if (
+          dataAttr[i] === "DateOfEntry" ||
+          dataAttr[i] === "DAdmit" ||
+          dataAttr[i] === "DOnset"
+        ) {
+          const fd = d[i].split("/");
+          item[dataAttr[i]] = fd[2] + "-" + fd[0] + "-" + fd[1];
+        } else {
+          item[dataAttr[i]] = d[i];
+        }
+      }
+      createCaseDB(item, setCreateError);
+    }
+  });
+};
 
 const ModalUploadCSV = props => {
   const { uploadModalOpen, handleUploadClose } = props;
   const [csvResults, setCsvResults] = useState(null);
+  const [createError, setCreateError] = useState(false);
+  const handleSaveBtn = () => {
+    if (csvResults) {
+      saveRecords(
+        [...csvResults.data].splice(1, csvResults.data.length - 1),
+        csvResults.data[0],
+        setCreateError
+      );
+
+      if (createError) {
+        alert("Unable to save records from CSV. Please try again.");
+      } else {
+        alert("New records are saved successfully");
+        handleUploadClose();
+        setCsvResults(null);
+      }
+    } else {
+      alert("Please upload your CSV file.");
+    }
+  };
 
   return (
     <>
@@ -12,12 +54,15 @@ const ModalUploadCSV = props => {
         className="flex flex-col space-y-5 bg-white w-full h-screen fixed top-0 left-0 z-40 overflow-y-scroll p-5"
         style={{ display: uploadModalOpen ? "block" : "none" }}
       >
-        <div className="flex w-full space-x-3">
+        <div className="flex w-full space-x-3 md:container md:mx-auto">
           <div className="flex-1">
             <UploadArea setCsvResults={setCsvResults} />
           </div>
           <div className="flex flex-col space-y-3">
-            <button className="flex justify-start items-center space-x-3 p-3 bg-green-600 rounded-lg text-white">
+            <button
+              className="flex justify-start items-center space-x-3 p-3 bg-green-600 rounded-lg text-white"
+              onClick={handleSaveBtn}
+            >
               <svg
                 className="h-6 w-6 text-white"
                 viewBox="0 0 24 24"
@@ -35,7 +80,10 @@ const ModalUploadCSV = props => {
             </button>
             <button
               className="flex justify-start items-center space-x-3 p-3 bg-gray-600 rounded-lg text-white"
-              onClick={handleUploadClose}
+              onClick={() => {
+                handleUploadClose();
+                setCsvResults(null);
+              }}
             >
               <svg
                 className="h-6 w-6 text-white"
@@ -71,16 +119,16 @@ const ModalUploadCSV = props => {
             <div className="w-full overflow-x-scroll">
               <table>
                 <thead>
-                  <tr className="border-b-2 border-gray-100 text-xs">
+                  <tr className="border-y-2 border-gray-100 text-xs">
                     {csvResults.data[0].map(d => (
-                      <th key={d} className="p-1">
+                      <th key={d} className="p-1 border-x-2 border-gray-100">
                         {d}
                       </th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
-                  {csvResults.data
+                  {[...csvResults.data]
                     .splice(1, csvResults.data.length - 1)
                     .map(d => (
                       <tr
@@ -88,7 +136,10 @@ const ModalUploadCSV = props => {
                         className="border-b-2 border-gray-100 text-xs"
                       >
                         {d.map(attr => (
-                          <td key={Math.random()} className="p-1">
+                          <td
+                            key={Math.random()}
+                            className="p-1 border-x-2 border-gray-100"
+                          >
                             {attr}
                           </td>
                         ))}

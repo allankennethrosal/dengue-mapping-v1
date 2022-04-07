@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import dengueData from "../data/dengue-cases-misocc.json";
-import { getCasesDB, createCaseDB } from "../utils/GlobalUtils";
+import { getCasesDB } from "../utils/GlobalUtils";
 
 export const GlobalContext = createContext();
 

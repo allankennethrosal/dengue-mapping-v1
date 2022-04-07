@@ -8,12 +8,12 @@ const FileActions = () => {
 
   return (
     <>
-      <div className="flex sm:container sm:mx-auto sm:flex-row flex-col sm:space-x-5 sm:space-y-0 space-x-0 space-y-5 justify-around items-center w-full">
+      <div className="flex md:container md:mx-auto sm:flex-row flex-col sm:space-x-5 sm:space-y-0 space-x-0 space-y-5 justify-around items-center w-full">
         <button
           className="flex flex-col justify-center items-center space-y-5 p-10 border-4 border-gray-200 hover:border-gray-400 rounded-lg w-full text-center"
           onClick={() =>
             saveFile(
-              "%PUBLIC_URL%/files/cases-sample-sheet.xlsx",
+              "https://github.com/allankennethrosal/dengue-mapping-v1/raw/gh-pages/files/cases-sample-sheet.xlsx",
               "cases-sample-sheet.xlsx"
             )
           }
@@ -45,7 +45,15 @@ const FileActions = () => {
             Template
           </span>
         </button>
-        <button className="flex flex-col justify-center items-center space-y-5 p-10 border-4 border-gray-200 hover:border-gray-400 rounded-lg w-full">
+        <button
+          className="flex flex-col justify-center items-center space-y-5 p-10 border-4 border-gray-200 hover:border-gray-400 rounded-lg w-full"
+          onClick={() =>
+            saveFile(
+              "https://raw.githubusercontent.com/allankennethrosal/dengue-mapping-v1/gh-pages/files/cases-sample-csv.csv",
+              "cases-sample-csv.csv"
+            )
+          }
+        >
           <svg
             className="h-12 w-12 text-gray-900"
             viewBox="0 0 24 24"
@@ -65,31 +73,6 @@ const FileActions = () => {
           </svg>
           <span className="font-bold">
             Download
-            <br />
-            Sample
-            <br />
-            CSV
-          </span>
-        </button>
-        <button className="flex flex-col justify-center items-center space-y-5 p-10 border-4 border-gray-200 hover:border-gray-400 rounded-lg w-full">
-          <svg
-            className="h-12 w-12 text-gray-900"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {" "}
-            <path stroke="none" d="M0 0h24v24H0z" />{" "}
-            <path d="M7 4a2 2 0 0 0 -2 2v3a2 3 0 0 1 -2 3a2 3 0 0 1 2 3v3a2 2 0 0 0 2 2" />{" "}
-            <path d="M17 4a2 2 0 0 1 2 2v3a2 3 0 0 0 2 3a2 3 0 0 0 -2 3v3a2 2 0 0 1 -2 2" />
-          </svg>
-          <span className="font-bold">
-            Parse
             <br />
             Sample
             <br />
