@@ -24,6 +24,7 @@ export const createCaseDB = (data, setError) => {
   axios
     .post(ENDPOINT_PROD + "/api/create.php", data)
     .then(function(response) {
+      console.log(response);
       setError(false);
     })
     .catch(function(error) {
