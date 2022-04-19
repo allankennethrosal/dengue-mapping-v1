@@ -1,5 +1,5 @@
 import React from "react";
-import { formatDate } from "../../utils/GlobalUtils";
+import { formatDate } from "../../../utils/GlobalUtils";
 
 /* 
   CASE INFORMATION
@@ -69,7 +69,7 @@ const ModalDetailsCaseInfo = props => {
             <input
               className="p-3 rounded-lg font-bold w-full"
               disabled
-              value="DF"
+              value={selectedData.Type}
             ></input>
           </div>
           <div className="flex flex-col justify-start items-start space-y-3">
@@ -77,7 +77,7 @@ const ModalDetailsCaseInfo = props => {
             <input
               className="p-3 rounded-lg font-bold w-full"
               disabled
-              value="NS1 Positive"
+              value={selectedData.LabRes}
             ></input>
           </div>
           <div className="flex flex-col justify-start items-start space-y-3">
@@ -85,7 +85,7 @@ const ModalDetailsCaseInfo = props => {
             <input
               className="p-3 rounded-lg font-bold w-full"
               disabled
-              value="P"
+              value={selectedData.CaseClassification}
             ></input>
           </div>
           <div className="flex flex-col justify-start items-start space-y-3">
@@ -93,7 +93,7 @@ const ModalDetailsCaseInfo = props => {
             <input
               className="p-3 rounded-lg font-bold w-full"
               disabled
-              value="A"
+              value={selectedData.Outcome}
             ></input>
           </div>
         </div>

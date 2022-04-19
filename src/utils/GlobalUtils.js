@@ -5,7 +5,7 @@ const ENDPOINT_PROD = "https://dengue-monitor.000webhostapp.com";
 
 export const getCasesDB = setCases => {
   axios
-    .get(ENDPOINT_PROD + "/api/retrieve.php")
+    .get(ENDPOINT_DEV + "/api/retrieve.php")
     .then(response => {
       // handle success
       setCases(response.data);
@@ -22,7 +22,7 @@ export const getCasesDB = setCases => {
 
 export const createCaseDB = (data, setError) => {
   axios
-    .post(ENDPOINT_PROD + "/api/create.php", data)
+    .post(ENDPOINT_DEV + "/api/create.php", data)
     .then(function(response) {
       console.log(response);
       setError(false);

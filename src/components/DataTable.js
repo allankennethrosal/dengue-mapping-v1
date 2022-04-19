@@ -5,7 +5,8 @@ import TableControlsTop from "./datatable/TableControlsTop";
 import TableControlsBottom from "./datatable/TableControlsBottom";
 import { GlobalContext } from "../context/GlobalContext";
 import { searchData, sortData, filterData } from "../utils/TableUtils";
-import ModalDetails from "./datatable/ModalDetails";
+import ModalDetails from "./datatable/details-modal/ModalDetails";
+import ModalForm from "./datatable/add-form/ModalForm";
 import ModalUploadCSV from "./datatable/add-components/ModalUploadCSV";
 
 const DataTable = () => {
@@ -37,6 +38,14 @@ const DataTable = () => {
   };
   const handleUploadClose = () => {
     setUploadModalOpen(false);
+  };
+
+  const [addFormOpen, setAddFormOpen] = useState(false);
+  const handleOpenAddForm = () => {
+    setAddFormOpen(true);
+  };
+  const handleCloseAddForm = () => {
+    setAddFormOpen(false);
   };
 
   useEffect(() => {
@@ -77,12 +86,20 @@ const DataTable = () => {
 
   return (
     <>
+      <ModalUploadCSV
+        uploadModalOpen={uploadModalOpen}
+        handleUploadClose={handleUploadClose}
+      />
+      <ModalForm open={addFormOpen} handleClose={handleCloseAddForm} />
+      {selectedData && (
+        <ModalDetails
+          open={openModalDetails}
+          handleClose={handleModalDetailsClose}
+          selectedData={selectedData}
+        />
+      )}
       <div className="flex flex-col bg-gray-100 max-h-screen h-screen">
         <Navbar />
-        <ModalUploadCSV
-          uploadModalOpen={uploadModalOpen}
-          handleUploadClose={handleUploadClose}
-        />
         <div
           className="flex flex-col justify-center items-center overflow-hidden"
           style={{ height: "calc(100vh-64px)" }}
@@ -103,6 +120,7 @@ const DataTable = () => {
                 setSortOrder={setSortOrder}
                 setTableLoading={setTableLoading}
                 handleUploadClick={handleUploadClick}
+                handleOpenAddForm={handleOpenAddForm}
               />
             </div>
           </div>
@@ -159,14 +177,6 @@ const DataTable = () => {
             </div>
           </div>
         </div>
-
-        {selectedData && (
-          <ModalDetails
-            open={openModalDetails}
-            handleClose={handleModalDetailsClose}
-            selectedData={selectedData}
-          />
-        )}
       </div>
     </>
   );

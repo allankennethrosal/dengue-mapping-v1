@@ -10,7 +10,8 @@ const TableControlsTop = props => {
     setSortBy,
     sortOrder,
     setSortOrder,
-    handleUploadClick
+    handleUploadClick,
+    handleOpenAddForm
   } = props;
   const handleSearchInput = e => {
     setSearchText(e.target.value);
@@ -63,7 +64,10 @@ const TableControlsTop = props => {
         </div>
 
         <div className="flex justify-end items-center w-full space-x-1">
-          <button className="flex justify-center items-center text-green-600 hover:text-white bg-white hover:bg-green-600 border-2 border-green-600 md:w-auto w-full py-2 px-3 rounded">
+          <button
+            className="flex justify-center items-center text-green-600 hover:text-white bg-white hover:bg-green-600 border-2 border-green-600 md:w-auto w-full py-2 px-3 rounded"
+            onClick={handleOpenAddForm}
+          >
             <svg
               className="h-6 w-6"
               fill="none"
