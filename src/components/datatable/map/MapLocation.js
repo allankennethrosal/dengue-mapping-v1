@@ -1,34 +1,23 @@
-import React, { useState, useCallback, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import "leaflet/dist/leaflet.css";
-import {
-  MapContainer,
-  TileLayer,
-  GeoJSON,
-  Tooltip,
-  ZoomControl,
-  Marker,
-  Popup
-} from "react-leaflet";
+import { MapContainer, TileLayer, ZoomControl, Marker } from "react-leaflet";
 import L from "leaflet";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
 let DefaultIcon = L.icon({
   iconUrl: icon,
-  shadowUrl: iconShadow
+  shadowUrl: iconShadow,
+  iconSize: [35, 46],
+  iconAnchor: [17, 46]
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const center = {
-  lat: 8.323365,
-  lng: 123.686847
-};
-
-const MapLocation = () => {
+const MapLocation = ({ position, setPosition }) => {
   return (
     <MapContainer
-      center={center}
-      zoom={10}
+      center={position}
+      zoom={12}
       className="w-full h-full z-0"
       minZoom={9}
       zoomControl={false}
@@ -36,18 +25,16 @@ const MapLocation = () => {
       // dragging={false}
     >
       <TileLayer
-        url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=4uThU4o90RRvKR2XeMf9"
-        attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
-        opacity={0.7}
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <ZoomControl position="bottomright" />
-      <DraggableMarker />
+      <DraggableMarker position={position} setPosition={setPosition} />
     </MapContainer>
   );
 };
 
-function DraggableMarker() {
-  const [position, setPosition] = useState(center);
+function DraggableMarker({ position, setPosition }) {
   const markerRef = useRef(null);
   const eventHandlers = useMemo(
     () => ({
@@ -67,11 +54,7 @@ function DraggableMarker() {
       eventHandlers={eventHandlers}
       position={position}
       ref={markerRef}
-    >
-      <Popup minWidth={90}>
-        <span>Draggable Marker</span>
-      </Popup>
-    </Marker>
+    ></Marker>
   );
 }
 

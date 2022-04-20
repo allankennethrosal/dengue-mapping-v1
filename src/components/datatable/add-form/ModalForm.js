@@ -64,7 +64,7 @@ const ModalForm = props => {
           </div>
 
           <div className="w-full border-t-2 py-5 border-gray-100">
-            {activePage === 0 && <ModalDetailsPatientInfo />}
+            {activePage === 0 && <ModalDetailsPatientInfo open={open} />}
             {activePage === 1 && <ModalDetailsCaseInfo />}
             {activePage === 2 && <ModalDetailsDRU />}
             {activePage === 3 && <ModalDetailsOtherInfo />}

@@ -135,10 +135,14 @@ const Map = () => {
         // dragging={false}
       >
         <TileLayer
+          attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+          url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+        />
+        {/* <TileLayer
           url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=4uThU4o90RRvKR2XeMf9"
           attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
           opacity={0.7}
-        />
+        /> */}
         {/* <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -152,9 +156,9 @@ const Map = () => {
                 fillColor: "#F52828",
                 color:
                   layerSelected === geoJson.properties.ADM3_EN
-                    ? "white"
-                    : "#000",
-                weight: layerSelected === geoJson.properties.ADM3_EN ? 3 : 2
+                    ? "#fab719"
+                    : "#CCC",
+                weight: layerSelected === geoJson.properties.ADM3_EN ? 3 : 1
               }}
               data={geoJson}
               onEachFeature={onEachLayer}
