@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ModalDetailsPatientInfo from "./ModalFormPatientInfo";
 import ModalDetailsCaseInfo from "./ModalFormCaseInfo";
 import ModalDetailsDRU from "./ModalFormDRU";
 import ModalDetailsOtherInfo from "./ModalFormOtherInfo";
 import ModalDetailsMenu from "./ModalFormMenu";
+import { TableContext } from "../../../context/TableContext";
 
 const ModalForm = props => {
   const { open, handleClose } = props;
   const [activePage, setActivePage] = useState(0);
+  const { addModalData, setAddModalData } = useContext(TableContext);
 
   const handleMenuClick = pageNum => {
     setActivePage(pageNum);
@@ -30,6 +32,10 @@ const ModalForm = props => {
               <input
                 className="text-green-700 border-2 border-gray-300 rounded p-2 w-full truncate overflow-hidden text-ellipsis"
                 type="text"
+                value={addModalData.EPIID}
+                onChange={e =>
+                  setAddModalData({ ...addModalData, EPIID: e.target.value })
+                }
                 autoFocus
               />
             </div>

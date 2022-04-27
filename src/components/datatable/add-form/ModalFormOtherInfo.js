@@ -7,15 +7,24 @@ const ModalDetailsOtherInfo = () => {
         <div className="flex flex-1 flex-col space-y-5">
           <div className="flex flex-col justify-start items-start space-y-3">
             <label className="text-sm">Morbidity Month:</label>
-            <input className="p-3 rounded-lg font-bold w-full border-2 border-gray-300" />
+            <input
+              type="number"
+              className="p-3 rounded-lg font-bold w-full border-2 border-gray-300"
+            />
           </div>
           <div className="flex flex-col justify-start items-start space-y-3">
             <label className="text-sm">Morbidity Week:</label>
-            <input className="p-3 rounded-lg font-bold w-full border-2 border-gray-300" />
+            <input
+              type="number"
+              className="p-3 rounded-lg font-bold w-full border-2 border-gray-300"
+            />
           </div>
           <div className="flex flex-col justify-start items-start space-y-3">
             <label className="text-sm">Year:</label>
-            <input className="p-3 rounded-lg font-bold w-full border-2 border-gray-300" />
+            <input
+              type="number"
+              className="p-3 rounded-lg font-bold w-full border-2 border-gray-300"
+            />
           </div>
         </div>
 

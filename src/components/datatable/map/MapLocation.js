@@ -1,9 +1,10 @@
-import React, { useState, useMemo, useRef } from "react";
+import React, { useMemo, useRef, useContext } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, ZoomControl, Marker } from "react-leaflet";
 import L from "leaflet";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
+import { TableContext } from "../../../context/TableContext";
 
 let DefaultIcon = L.icon({
   iconUrl: icon,
@@ -13,10 +14,13 @@ let DefaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const MapLocation = ({ position, setPosition }) => {
+const MapLocation = () => {
+  const { addModalData } = useContext(TableContext);
+  console.log(addModalData);
+
   return (
     <MapContainer
-      center={position}
+      center={{ lat: addModalData.Lat, lng: addModalData.Lng }}
       zoom={12}
       className="w-full h-full z-0"
       minZoom={9}
@@ -29,19 +33,24 @@ const MapLocation = ({ position, setPosition }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <ZoomControl position="bottomright" />
-      <DraggableMarker position={position} setPosition={setPosition} />
+      <DraggableMarker />
     </MapContainer>
   );
 };
 
-function DraggableMarker({ position, setPosition }) {
+function DraggableMarker() {
+  const { addModalData, setAddModalData } = useContext(TableContext);
   const markerRef = useRef(null);
   const eventHandlers = useMemo(
     () => ({
       dragend() {
         const marker = markerRef.current;
         if (marker != null) {
-          setPosition(marker.getLatLng());
+          setAddModalData({
+            ...addModalData,
+            Lat: marker.getLatLng().lat,
+            Lng: marker.getLatLng().lng
+          });
         }
       }
     }),
@@ -51,8 +60,19 @@ function DraggableMarker({ position, setPosition }) {
   return (
     <Marker
       draggable={true}
-      eventHandlers={eventHandlers}
-      position={position}
+      eventHandlers={{
+        dragend: () => {
+          const marker = markerRef.current;
+          if (marker != null) {
+            setAddModalData({
+              ...addModalData,
+              Lat: marker.getLatLng().lat,
+              Lng: marker.getLatLng().lng
+            });
+          }
+        }
+      }}
+      position={{ lat: addModalData.Lat, lng: addModalData.Lng }}
       ref={markerRef}
     ></Marker>
   );
