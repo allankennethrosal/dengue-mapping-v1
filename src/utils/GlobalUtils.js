@@ -1,7 +1,7 @@
-// import axios from "axios";
+import axios from "axios";
 
 const ENDPOINT_DEV = "http://localhost/dengue-monitor";
-const ENDPOINT_PROD = "https://dengue-monitor.000webhostapp.com";
+const ENDPOINT_PROD = "http://mapquito.byethost14.com";
 
 export const getCasesDB = setCases => {
   fetch(ENDPOINT_PROD + "/api/retrieve.php")
@@ -14,7 +14,7 @@ export const getCasesDB = setCases => {
     });
 
   // axios
-  //   .get(ENDPOINT_DEV + "/api/retrieve.php")
+  //   .get(ENDPOINT_PROD + "/api/retrieve.php")
   //   .then(response => {
   //     // handle success
   //     setCases(response.data);
