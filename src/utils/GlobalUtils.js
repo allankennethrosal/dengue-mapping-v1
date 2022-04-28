@@ -1,10 +1,10 @@
-import axios from "axios";
+// import axios from "axios";
 
 const ENDPOINT_DEV = "http://localhost/dengue-monitor";
 const ENDPOINT_PROD = "https://dengue-monitor.000webhostapp.com";
 
 export const getCasesDB = setCases => {
-  fetch(ENDPOINT_DEV + "/api/retrieve.php")
+  fetch(ENDPOINT_PROD + "/api/retrieve.php")
     .then(response => response.json())
     .then(data => setCases(data))
     .catch(error => {
@@ -30,7 +30,7 @@ export const getCasesDB = setCases => {
 };
 
 export const createCaseDB = (data, setError) => {
-  fetch(ENDPOINT_DEV + "/api/create.php", {
+  fetch(ENDPOINT_PROD + "/api/create.php", {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json"
