@@ -5,14 +5,34 @@ import ModalDetailsDRU from "./ModalFormDRU";
 import ModalDetailsOtherInfo from "./ModalFormOtherInfo";
 import ModalDetailsMenu from "./ModalFormMenu";
 import { TableContext } from "../../../context/TableContext";
+import { reviewData } from "../../../utils/TableUtils";
+import { createCaseDB } from "../../../utils/GlobalUtils";
 
 const ModalForm = props => {
   const { open, handleClose } = props;
   const [activePage, setActivePage] = useState(0);
   const { addModalData, setAddModalData } = useContext(TableContext);
+  const [error, setError] = useState(false);
 
   const handleMenuClick = pageNum => {
     setActivePage(pageNum);
+  };
+
+  const handleReview = () => {
+    const validate = reviewData(addModalData);
+    if (validate) {
+      let msg = "Please fill in the following missing fields:\r\n";
+      validate.forEach(i => (msg += i + "\r\n"));
+
+      alert(msg);
+    } else {
+      let msg =
+        "Make sure to review all the information before submitting. Confirm submission of new record?";
+      if (window.confirm(msg)) {
+        createCaseDB(addModalData, setError);
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -39,6 +59,21 @@ const ModalForm = props => {
                 autoFocus
               />
             </div>
+            <button onClick={handleReview}>
+              <svg
+                className="h-8 w-8 text-green-700"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                {" "}
+                <polyline points="9 11 12 14 22 4" />{" "}
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+              </svg>
+            </button>
             <button
               onClick={() => {
                 handleClose();
@@ -46,7 +81,7 @@ const ModalForm = props => {
               }}
             >
               <svg
-                className="h-8 w-8 text-gray-900"
+                className="h-8 w-8 text-red-700"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"

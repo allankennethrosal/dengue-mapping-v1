@@ -72,3 +72,17 @@ export const filterData = (data, year, muncity) => {
     });
   }
 };
+
+export const reviewData = data => {
+  let errors = [];
+
+  for (let [key, value] of Object.entries(data)) {
+    if (!value) errors.push(key);
+  }
+
+  if (errors.length > 0) {
+    return errors;
+  } else {
+    return false;
+  }
+};

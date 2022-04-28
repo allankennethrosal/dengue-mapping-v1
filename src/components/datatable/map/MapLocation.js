@@ -16,7 +16,6 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const MapLocation = () => {
   const { addModalData } = useContext(TableContext);
-  console.log(addModalData);
 
   return (
     <MapContainer
