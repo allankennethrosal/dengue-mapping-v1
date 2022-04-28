@@ -1,6 +1,6 @@
-import axios from "axios";
+// import axios from "axios";
 
-const ENDPOINT_DEV = "http://localhost/dengue-monitor";
+// const ENDPOINT_DEV = "http://localhost/dengue-monitor";
 const ENDPOINT_PROD = "http://mapquito.byethost14.com";
 
 export const getCasesDB = setCases => {

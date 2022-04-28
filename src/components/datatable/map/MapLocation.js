@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useContext } from "react";
+import React, { useRef, useContext } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, ZoomControl, Marker } from "react-leaflet";
 import L from "leaflet";
@@ -40,21 +40,6 @@ const MapLocation = () => {
 function DraggableMarker() {
   const { addModalData, setAddModalData } = useContext(TableContext);
   const markerRef = useRef(null);
-  const eventHandlers = useMemo(
-    () => ({
-      dragend() {
-        const marker = markerRef.current;
-        if (marker != null) {
-          setAddModalData({
-            ...addModalData,
-            Lat: marker.getLatLng().lat,
-            Lng: marker.getLatLng().lng
-          });
-        }
-      }
-    }),
-    []
-  );
 
   return (
     <Marker
