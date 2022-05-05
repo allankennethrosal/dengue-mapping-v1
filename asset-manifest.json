@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/dengue-mapping-v1/static/css/main.f7fab195.css",
-    "main.js": "/dengue-mapping-v1/static/js/main.f923865b.js",
+    "main.css": "/dengue-mapping-v1/static/css/main.58317c05.css",
+    "main.js": "/dengue-mapping-v1/static/js/main.b4238278.js",
     "static/js/787.d240ee47.chunk.js": "/dengue-mapping-v1/static/js/787.d240ee47.chunk.js",
     "index.html": "/dengue-mapping-v1/index.html",
-    "main.f7fab195.css.map": "/dengue-mapping-v1/static/css/main.f7fab195.css.map",
-    "main.f923865b.js.map": "/dengue-mapping-v1/static/js/main.f923865b.js.map",
+    "main.58317c05.css.map": "/dengue-mapping-v1/static/css/main.58317c05.css.map",
+    "main.b4238278.js.map": "/dengue-mapping-v1/static/js/main.b4238278.js.map",
     "787.d240ee47.chunk.js.map": "/dengue-mapping-v1/static/js/787.d240ee47.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f7fab195.css",
-    "static/js/main.f923865b.js"
+    "static/css/main.58317c05.css",
+    "static/js/main.b4238278.js"
   ]
 }
