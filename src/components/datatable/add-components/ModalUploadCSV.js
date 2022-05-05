@@ -19,7 +19,7 @@ const saveRecords = (csvData, dataAttr, setCreateError) => {
           item[dataAttr[i]] = d[i];
         }
       }
-      createCaseDB({ ...item, Lat: null, Lng: null }, setCreateError);
+      createCaseDB({ ...item, Lat: 0, Lng: 0 }, setCreateError);
     }
   });
 };

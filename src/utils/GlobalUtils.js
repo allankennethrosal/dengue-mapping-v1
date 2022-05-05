@@ -1,63 +1,71 @@
-// import axios from "axios";
+import axios from "axios";
 
 // const ENDPOINT_DEV = "http://localhost/dengue-monitor";
 // const ENDPOINT_PROD = "http://mapquito.byethost14.com";
 const ENDPOINT_PROD = "https://dengue-monitor.000webhostapp.com";
 
 export const getCasesDB = setCases => {
-  fetch(ENDPOINT_PROD + "/api/retrieve.php")
-    .then(response => response.json())
-    .then(data => setCases(data))
-    .catch(error => {
-      // handle error
-      console.log(error);
-      setCases(null);
-    });
-
-  // axios
-  //   .get(ENDPOINT_PROD + "/api/retrieve.php")
-  //   .then(response => {
-  //     // handle success
-  //     setCases(response.data);
-  //   })
+  // fetch(ENDPOINT_PROD + "/api/retrieve.php")
+  //   .then(response => response.json())
+  //   .then(data => setCases(data))
   //   .catch(error => {
   //     // handle error
   //     console.log(error);
   //     setCases(null);
-  //   })
-  //   .then(() => {
-  //     // always executed
   //   });
+
+  axios
+    .get(ENDPOINT_PROD + "/api/retrieve.php")
+    .then(response => {
+      // handle success
+      setCases(response.data);
+    })
+    .catch(error => {
+      // handle error
+      console.log(error);
+      setCases(null);
+    })
+    .then(() => {
+      // always executed
+    });
 };
 
 export const createCaseDB = (data, setError) => {
-  fetch(ENDPOINT_PROD + "/api/create.php", {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    method: "POST",
-    body: JSON.stringify(data)
-  })
-    .then(function(res) {
-      console.log(res);
-      setError(false);
-    })
-    .catch(function(res) {
-      console.log(res);
-      setError(true);
-    });
+  let payload = "";
+  Object.entries(data).forEach(d => {
+    payload += d[0] + "=" + d[1] + "&";
+  });
+  payload = payload.trim("&");
 
-  // axios
-  //   .post(ENDPOINT_DEV + "/api/create.php", data)
-  //   .then(function(response) {
-  //     console.log(response);
+  // fetch(
+  //   ENDPOINT_PROD + "/api/create1.php?" + payload
+  //   // , {
+  //   //   headers: {
+  //   //     Accept: "application/json",
+  //   //     "Content-Type": "application/json"
+  //   //   },
+  //   //   method: "POST",
+  //   //   body: JSON.stringify(data)
+  //   // }
+  // )
+  //   .then(function(res) {
+  //     console.log(res);
   //     setError(false);
   //   })
-  //   .catch(function(error) {
-  //     console.log(error);
+  //   .catch(function(res) {
+  //     console.log(res);
   //     setError(true);
   //   });
+
+  axios
+    .get(ENDPOINT_PROD + "/api/create1.php?" + payload)
+    .then(function(response) {
+      setError(false);
+    })
+    .catch(function(error) {
+      console.log(error);
+      setError(true);
+    });
 };
 
 export const formatDate = rawDate => {
